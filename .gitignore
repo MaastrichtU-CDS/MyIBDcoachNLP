@@ -3,3 +3,4 @@ dataset/
 .venv3.10
 *.xlsx
 results/
+*.npy
