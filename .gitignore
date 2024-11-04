@@ -1,7 +1,5 @@
 dataset/
 .venv
 .venv3.10
-.xlsx
-.npy
-saved_models/
+*.xlsx
 results/
