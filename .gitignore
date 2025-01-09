@@ -1,5 +1,5 @@
-dataset/
-.venv
+data/
+venv
 .venv3.10
 *.xlsx
 results/

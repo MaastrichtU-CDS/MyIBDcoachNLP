@@ -2,3 +2,6 @@ pandas
 bertopic
 openpyxl
 numpy
+scikit-learn
+odfpy
+pyexcel-ods
