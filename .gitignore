@@ -1,6 +1,6 @@
 data/
 venv
-.venv3.10
+venv2
 *.xlsx
 results/
 *.npy
