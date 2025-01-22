@@ -6,3 +6,4 @@ scikit-learn
 odfpy
 pyexcel-ods
 matplotlib
+tensorflow
