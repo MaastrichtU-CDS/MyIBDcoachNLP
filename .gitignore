@@ -3,4 +3,4 @@ venv
 *.xlsx
 results/
 *.npy
-*.json
+tf
