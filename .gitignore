@@ -1,6 +1,3 @@
 data/
 venv
-*.xlsx
-results/
-*.npy
 tf
