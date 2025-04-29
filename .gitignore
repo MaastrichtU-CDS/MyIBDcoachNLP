@@ -1,5 +1,8 @@
 data/
+data_zip/
 venv
 .venv
 myenv
+venv-gpu
+saved_models/
 tf
