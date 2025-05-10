@@ -1,8 +1,9 @@
 data/
 data_zip/
-venv
-.venv
-myenv
-venv-gpu
+venv/
+.venv/
+myenv/
+venv-gpu/
 saved_models/
 tf
+my-env-python3.10/
