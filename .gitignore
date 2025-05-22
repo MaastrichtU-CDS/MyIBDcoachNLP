@@ -3,6 +3,9 @@ data_zip/
 venv/
 .venv/
 myenv/
+my_env/
+env-link-3.10/
+myenv-link/
 venv-gpu/
 saved_models/
 tf
