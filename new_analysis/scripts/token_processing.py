@@ -1,105 +1,94 @@
-# download nltk and spacy library
+# Imports
 import nltk
 from nltk.tokenize import word_tokenize
 import string
-import pickle
 from nltk.stem.snowball import SnowballStemmer
-from tqdm import tqdm
-import pickle
 from gensim.corpora.dictionary import Dictionary
-import simplemma
-from typing import List
+from typing import List, Dict
 import pandas as pd
 import spacy
+import os
+import pickle
 
-# Download NLTK's tokenizer (only needed once)
+# Download tokenizer data
 nltk.download("punkt_tab")
 
-# load the stemmer
+# Load NLP tools
 stemmer = SnowballStemmer("dutch")
+nlp = spacy.load("nl_core_news_sm")
 
-# load the lemmatizer
-nlp = spacy.load("nl_core_news_lg")
-nlp.tokenizer = lambda text: Doc(nlp.vocab, words=text.split(" "))
+# ----------------------------------------
+# Helper functions
+# ----------------------------------------
 
-# Example
-def stem_word(stemmer, words):
-    stems = [stemmer.stem(word) for word in words]
-    return stems
+def clean_texts(texts: List[str]) -> List[str]:
+    return [text.translate(str.maketrans("", "", string.punctuation)).lower() for text in texts]
 
+def tokenize_texts(texts: List[str]) -> List[List[str]]:
+    return [word_tokenize(text, language="dutch") for text in texts]
 
-def clean_texts(texts: list):
-    texts = [text.translate(str.maketrans("", "", string.punctuation)) for text in texts]
-    texts = [text.lower() for text in texts]
-    return texts
+def stem_texts(tokenized: List[List[str]]) -> List[List[str]]:
+    return [[stemmer.stem(word) for word in doc] for doc in tokenized]
 
-def stem_and_lemma(texts: List[List[str]]):
-    stemmed_texts = stemmed_texts = [stem_word(stemmer, doc) for doc in texts]
-    lemmatized_texts = []
-    for tokens in texts:
-        doc = nlp(" ".join(tokens))  # Reconstruct sentence
-        lemmas = [token.lemma_ for token in doc]
-        lemmatized_texts.append(lemmas)
-    
-    return stemmed_texts, lemmatized_texts
+def lemmatize_texts(tokenized: List[List[str]]) -> List[List[str]]:
+    lemmatized = []
+    for tokens in tokenized:
+        doc = nlp(" ".join(tokens))
+        lemmatized.append([token.lemma_ for token in doc])
+    return lemmatized
 
-if __name__ == "__main__":  # Only runs when script.py is executed directly
+def build_dictionaries(data: Dict[str, List[List[str]]]) -> Dict[str, Dictionary]:
+    return {name: Dictionary(tokens) for name, tokens in data.items()}
 
-    # to calculate c_v, we need to import the original messages as the reference corpus
-    messages_df = pd.read_excel("/workspace/persistent/mijnidbcoachnlp/data/analysis_data/translated_clean_message_data.xlsx", index_col=0)
-    messages = messages_df["clean_message"].to_list()
-    messages = clean_texts(messages)
+def save_data(data: Dict[str, object], path: str, file_ext: str = ".pkl"):
+    os.makedirs(path, exist_ok=True)
+    for name, obj in data.items():
+        file_path = os.path.join(path, f"{name}{file_ext}")
+        if file_ext == ".pkl":
+            with open(file_path, "wb") as f:
+                pickle.dump(obj, f)
+        elif file_ext == ".dict":
+            obj.save(file_path)
 
-    # read the sentence data 
-    df = pd.read_excel("/workspace/persistent/mijnidbcoachnlp/data/analysis_data/sentence_data_for_analysis.xlsx", index_col=0)
-    sentences = df["sentence"].to_list()
-    sentences = clean_texts(sentences)
+# ----------------------------------------
+# Main script
+# ----------------------------------------
 
-    #tokenize_messages
-    mes_tokens = [word_tokenize(message, language="dutch") for message in messages]
-    stem_mes_tokens, lem_mes_tokens = stem_and_lemma(texts=mes_tokens)
-
-    # tokenize sentences
-    sen_tokens = [word_tokenize(sentence, language="dutch") for sentence in sentences]
-    stem_sen_tokens, lem_sen_tokens = stem_and_lemma(texts=sen_tokens)
-
-    # convert to dictionaries
-    dict_mes = Dictionary(mes_tokens)
-    dict_mes_stem = Dictionary(stem_mes_tokens)
-    dict_mes_lem = Dictionary(lem_mes_tokens)
-
-    # convert sentence tokens to dictionaries
-    dict_sen = Dictionary(sen_tokens)
-    dict_sen_stem = Dictionary(stem_sen_tokens)
-    dict_sen_lem = Dictionary(lem_sen_tokens)
-
-    import os
-    import pickle
-
-    # Define the save path
+if __name__ == "__main__":
     save_path = "/workspace/persistent/mijnidbcoachnlp/data/tokens"
-    os.makedirs(save_path, exist_ok=True)  # Ensure the folder exists
 
-    # Dictionary of objects to save
-    objects_to_save = {
-        "stem_mes_tokens.pkl": stem_mes_tokens,
-        "lem_mes_tokens.pkl": lem_mes_tokens,
-        "stem_sen_tokens.pkl": stem_sen_tokens,
-        "lem_sen_tokens.pkl": lem_sen_tokens,
-        "tokenized_messages.pkl": mes_tokens,
-        "tokenized_sentences.pkl": sen_tokens,
-        "dict_mes.pkl": dict_mes,
-        "dict_mes_stem.pkl": dict_mes_stem,
-        "dict_mes_lem.pkl": dict_mes_lem,
-        "dict_sen.pkl": dict_sen,
-        "dict_sen_stem.pkl": dict_sen_stem,
-        "dict_sen_lem.pkl": dict_sen_lem,
-    }
+    # Load and clean text
+    messages_df = pd.read_excel(
+        "/workspace/persistent/mijnidbcoachnlp/data/analysis_data/translated_clean_message_data.xlsx",
+        index_col=0
+    )
+    messages = clean_texts(messages_df["clean_message"].tolist())
 
-    # Save each object to file
-    for filename, obj in objects_to_save.items():
-        with open(os.path.join(save_path, filename), "wb") as f:
-            pickle.dump(obj, f)
+    sentences_df = pd.read_excel(
+        "/workspace/persistent/mijnidbcoachnlp/data/analysis_data/sentence_data_for_analysis.xlsx",
+        index_col=0
+    )
+    sentences = clean_texts(sentences_df["sentence"].tolist())
+
+    # Process each type
+    results = {}
+    for name, texts in {"messages": messages, "sentences": sentences}.items():
+        tokenized = tokenize_texts(texts)
+        stemmed = stem_texts(tokenized)
+        lemmatized = lemmatize_texts(tokenized)
+
+        # Save token lists
+        results[f"tokenized_{name}"] = tokenized
+        results[f"stemmed_{name}"] = stemmed
+        results[f"lemmatized_{name}"] = lemmatized
+
+    # Save tokens as .pkl
+    save_data(results, save_path, file_ext=".pkl")
+
+    # Build and save dictionaries
+    dicts = build_dictionaries({
+        f"{key}_dict": value for key, value in results.items()
+    })
+    save_data(dicts, save_path, file_ext=".dict")
 
     print("All tokens and dictionaries saved successfully.")
-
