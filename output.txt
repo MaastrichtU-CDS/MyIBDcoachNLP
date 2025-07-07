@@ -1,559 +1,167 @@
-Tuning model: stv1 at param combination: min_cluster_size = 10, n_components = 5, n_neighbors = 30
-Document: 0.5747294174875349
-Number of topics: 96
-Diversity score: 0.7145833333333333
-C_V coherence: 0.3597604381181085
-Average embedding cosine similarity weighted: 0.38817198333810105, unweighted: 0.466794490814209
+Tuning model: mini at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 10
+Document: 0.7487534962908914
+Number of topics: 40
+Diversity score: 0.7975
+C_V coherence: 0.377675491635672
+Average embedding cosine similarity weighted: 0.47949030686551647, unweighted: 0.5271620154380798
  
-Tuning model: stv1 at param combination: min_cluster_size = 10, n_components = 10, n_neighbors = 30
-Document: 0.5403137541043415
-Number of topics: 106
-Diversity score: 0.7339622641509433
-C_V coherence: 0.35932946129606186
-Average embedding cosine similarity weighted: 0.41809077226522673, unweighted: 0.46751973032951355
+Tuning model: mini at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 5
+Document: 0.6934208926182659
+Number of topics: 37
+Diversity score: 0.8216216216216217
+C_V coherence: 0.3881848389809638
+Average embedding cosine similarity weighted: 0.48552409467238034, unweighted: 0.49756380915641785
  
-Tuning model: stv1 at param combination: min_cluster_size = 10, n_components = 15, n_neighbors = 30
-Document: 0.5822692448011675
-Number of topics: 106
-Diversity score: 0.7367924528301887
-C_V coherence: 0.3585258961419301
-Average embedding cosine similarity weighted: 0.39573003422023856, unweighted: 0.46279096603393555
+Tuning model: mpnet at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 20
+Document: 0.7138513924358507
+Number of topics: 40
+Diversity score: 0.7775
+C_V coherence: 0.3667311644675096
+Average embedding cosine similarity weighted: 0.5420463521699889, unweighted: 0.5906001925468445
  
-Tuning model: stv1 at param combination: min_cluster_size = 20, n_components = 5, n_neighbors = 30
-Document: 0.5843366168065183
-Number of topics: 54
-Diversity score: 0.7277777777777777
-C_V coherence: 0.34808354561627514
-Average embedding cosine similarity weighted: 0.3631940489877151, unweighted: 0.421267569065094
+Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 5
+Document: 0.7755077222424905
+Number of topics: 30
+Diversity score: 0.82
+C_V coherence: 0.3702771937987307
+Average embedding cosine similarity weighted: 0.49610809145516616, unweighted: 0.5284542441368103
  
-Tuning model: stv1 at param combination: min_cluster_size = 20, n_components = 10, n_neighbors = 30
-Document: 0.5504073938951721
-Number of topics: 54
-Diversity score: 0.7240740740740741
-C_V coherence: 0.34571993535302376
-Average embedding cosine similarity weighted: 0.37063600238160754, unweighted: 0.4259084165096283
+Tuning model: stv1 at param combination: min_cluster_size = 20, n_components = 15, n_neighbors = 5
+Document: 0.9934330536300621
+Number of topics: 9
+Diversity score: 0.6666666666666666
+C_V coherence: 0.31697907802684777
+Average embedding cosine similarity weighted: 0.11931279253851669, unweighted: 0.5328153967857361
  
-Tuning model: stv1 at param combination: min_cluster_size = 20, n_components = 15, n_neighbors = 30
-Document: 0.9714216222789737
-Number of topics: 12
-Diversity score: 0.725
-C_V coherence: 0.34774926724552246
-Average embedding cosine similarity weighted: 0.15430346171618345, unweighted: 0.49365606904029846
- 
-Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 30
-Document: 0.5606226438039645
-Number of topics: 35
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 5
+Document: 0.9847987352547732
+Number of topics: 7
 Diversity score: 0.7285714285714285
-C_V coherence: 0.35592218344593746
-Average embedding cosine similarity weighted: 0.35193580266516533, unweighted: 0.4074651300907135
+C_V coherence: 0.31183986054721685
+Average embedding cosine similarity weighted: 0.11732093437817928, unweighted: 0.5700465440750122
  
-Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 30
-Document: 0.9927033929222912
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 10
+Document: 0.9912440715067493
+Number of topics: 5
+Diversity score: 0.64
+C_V coherence: 0.3198958994990799
+Average embedding cosine similarity weighted: 0.11355840124545427, unweighted: 0.5070825815200806
+ 
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 20
+Document: 0.5653654384044753
+Number of topics: 38
+Diversity score: 0.7315789473684211
+C_V coherence: 0.35896908486786233
+Average embedding cosine similarity weighted: 0.34979227556736653, unweighted: 0.40288060903549194
+ 
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 5
+Document: 0.9798127204183388
+Number of topics: 6
+Diversity score: 0.6666666666666666
+C_V coherence: 0.313443543125159
+Average embedding cosine similarity weighted: 0.11419746507940805, unweighted: 0.5320190787315369
+ 
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 10
+Document: 0.6558433661680652
+Number of topics: 33
+Diversity score: 0.7757575757575758
+C_V coherence: 0.36683528372279994
+Average embedding cosine similarity weighted: 0.3028890669605583, unweighted: 0.37442144751548767
+ 
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 20
+Document: 0.9928250030402529
 Number of topics: 6
 Diversity score: 0.6166666666666667
-C_V coherence: 0.30193310537417567
-Average embedding cosine similarity weighted: 0.11533723507337998, unweighted: 0.5353683829307556
+C_V coherence: 0.3139864964820755
+Average embedding cosine similarity weighted: 0.11535780994967174, unweighted: 0.5334006547927856
  
-Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 30
-Document: 0.9564635777696704
-Number of topics: 12
-Diversity score: 0.7333333333333333
-C_V coherence: 0.3378074697801788
-Average embedding cosine similarity weighted: 0.15517634151850396, unweighted: 0.5053327679634094
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 5
-Document: 1.0
-Number of topics: 3
-Diversity score: 0.9333333333333333
-C_V coherence: 0.36570662787584896
-Average embedding cosine similarity weighted: 0.11182345095199636, unweighted: 0.4317600727081299
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 10
-Document: 0.9947707649276419
-Number of topics: 3
-Diversity score: 0.8333333333333334
-C_V coherence: 0.2979036594646536
-Average embedding cosine similarity weighted: 0.11210713105453839, unweighted: 0.38482916355133057
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 20
-Document: 0.9408974826705582
-Number of topics: 9
-Diversity score: 0.7777777777777778
-C_V coherence: 0.36595724184863615
-Average embedding cosine similarity weighted: 0.15034769213721935, unweighted: 0.43692725896835327
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 30
-Document: 1.0
-Number of topics: 3
-Diversity score: 0.8
-C_V coherence: 0.29216674765774403
-Average embedding cosine similarity weighted: 0.11381869900676726, unweighted: 0.3839608132839203
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 5
-Document: 0.9846771251368114
-Number of topics: 3
-Diversity score: 0.9
-C_V coherence: 0.26755497668856415
-Average embedding cosine similarity weighted: 0.10812749882785717, unweighted: 0.3886251449584961
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 10
-Document: 1.0
-Number of topics: 2
-Diversity score: 1.0
-C_V coherence: 0.3514627276643592
-Average embedding cosine similarity weighted: 0.11068236399462344, unweighted: 0.25601521134376526
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 20
-Document: 0.944302565973489
-Number of topics: 9
-Diversity score: 0.7777777777777778
-C_V coherence: 0.35949378421799244
-Average embedding cosine similarity weighted: 0.14994488394575126, unweighted: 0.43769627809524536
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 30
-Document: 0.9927033929222912
-Number of topics: 5
-Diversity score: 0.74
-C_V coherence: 0.2834402758063796
-Average embedding cosine similarity weighted: 0.11453876061688797, unweighted: 0.48277410864830017
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 10
-Document: 0.9928250030402529
-Number of topics: 5
-Diversity score: 0.86
-C_V coherence: 0.34954405347291245
-Average embedding cosine similarity weighted: 0.13638271985320938, unweighted: 0.36792653799057007
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 20
-Document: 0.9880822084397421
-Number of topics: 4
-Diversity score: 0.775
-C_V coherence: 0.30324375699042144
-Average embedding cosine similarity weighted: 0.11253448273585392, unweighted: 0.4734361171722412
- 
-Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 30
-Document: 1.0
-Number of topics: 3
-Diversity score: 0.8
-C_V coherence: 0.29216674765774403
-Average embedding cosine similarity weighted: 0.11381923410849865, unweighted: 0.38468047976493835
- 
-Tuning model: stv2 at param combination: min_cluster_size = 10, n_components = 5, n_neighbors = 30
-Document: 0.5961327982488143
-Number of topics: 100
-Diversity score: 0.723
-C_V coherence: 0.3753715917364093
-Average embedding cosine similarity weighted: 0.44642799706640945, unweighted: 0.524554967880249
- 
-Tuning model: stv2 at param combination: min_cluster_size = 10, n_components = 10, n_neighbors = 30
-Document: 0.5795938222060075
-Number of topics: 108
-Diversity score: 0.7296296296296296
-C_V coherence: 0.37194256864085445
-Average embedding cosine similarity weighted: 0.4559921589853931, unweighted: 0.5280219316482544
- 
-Tuning model: stv2 at param combination: min_cluster_size = 10, n_components = 15, n_neighbors = 30
-Document: 0.608780250516843
-Number of topics: 98
-Diversity score: 0.7234693877551021
-C_V coherence: 0.3630530473707952
-Average embedding cosine similarity weighted: 0.45038426060213166, unweighted: 0.5262852311134338
- 
-Tuning model: stv2 at param combination: min_cluster_size = 20, n_components = 5, n_neighbors = 30
-Document: 0.5877417001094491
-Number of topics: 59
-Diversity score: 0.7186440677966102
-C_V coherence: 0.35206986238553944
-Average embedding cosine similarity weighted: 0.42607286909143055, unweighted: 0.4755444824695587
- 
-Tuning model: stv2 at param combination: min_cluster_size = 20, n_components = 10, n_neighbors = 30
-Document: 0.6896509789614496
-Number of topics: 42
-Diversity score: 0.7166666666666667
-C_V coherence: 0.3576937097447791
-Average embedding cosine similarity weighted: 0.3501267058364594, unweighted: 0.4815729558467865
- 
-Tuning model: stv2 at param combination: min_cluster_size = 20, n_components = 15, n_neighbors = 30
-Document: 0.6170497385382464
-Number of topics: 52
-Diversity score: 0.7365384615384616
-C_V coherence: 0.3575730016940914
-Average embedding cosine similarity weighted: 0.4015976202372824, unweighted: 0.473530650138855
- 
-Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 30
-Document: 0.6970691961571203
-Number of topics: 30
-Diversity score: 0.71
-C_V coherence: 0.34513563864956315
-Average embedding cosine similarity weighted: 0.32807146396750514, unweighted: 0.4982552230358124
- 
-Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 30
-Document: 0.7174996959747051
-Number of topics: 28
-Diversity score: 0.7357142857142858
-C_V coherence: 0.3617618335881846
-Average embedding cosine similarity weighted: 0.3221452358112497, unweighted: 0.4845104217529297
- 
-Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 30
-Document: 0.8106530463334549
-Number of topics: 22
-Diversity score: 0.7090909090909091
-C_V coherence: 0.35496848574911205
-Average embedding cosine similarity weighted: 0.2704676551224053, unweighted: 0.5132150650024414
- 
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 5
-Document: 0.9725161133406299
-Number of topics: 5
-Diversity score: 0.92
-C_V coherence: 0.36830994680948753
-Average embedding cosine similarity weighted: 0.17437219828631828, unweighted: 0.3736787736415863
- 
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 10
-Document: 0.8832542867566582
-Number of topics: 13
-Diversity score: 0.8384615384615385
-C_V coherence: 0.3644592297308158
-Average embedding cosine similarity weighted: 0.24061527818494735, unweighted: 0.36892378330230713
- 
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 20
-Document: 0.8488386233734647
-Number of topics: 14
-Diversity score: 0.8071428571428572
-C_V coherence: 0.36703283820119986
-Average embedding cosine similarity weighted: 0.24890390461187992, unweighted: 0.4027417004108429
- 
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 30
-Document: 0.6988933479265474
-Number of topics: 21
-Diversity score: 0.8047619047619048
-C_V coherence: 0.3573265399195859
-Average embedding cosine similarity weighted: 0.31534562434282265, unweighted: 0.38806071877479553
- 
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 5
-Document: 0.9854067858445823
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 5
+Document: 0.9840690745470023
 Number of topics: 6
-Diversity score: 0.9166666666666666
-C_V coherence: 0.35013040690273906
-Average embedding cosine similarity weighted: 0.17616510459828874, unweighted: 0.3828273117542267
+Diversity score: 0.6666666666666666
+C_V coherence: 0.2937717678622624
+Average embedding cosine similarity weighted: 0.11512948536542873, unweighted: 0.5251131653785706
  
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 10
-Document: 0.8719445457862094
-Number of topics: 11
-Diversity score: 0.8909090909090909
-C_V coherence: 0.3789969426213871
-Average embedding cosine similarity weighted: 0.24663918172132687, unweighted: 0.35737404227256775
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 10
+Document: 0.9894199197373221
+Number of topics: 7
+Diversity score: 0.7
+C_V coherence: 0.35231690037608404
+Average embedding cosine similarity weighted: 0.1369922959933473, unweighted: 0.4940427839756012
  
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 20
-Document: 0.8403259151161376
-Number of topics: 11
-Diversity score: 0.8727272727272727
-C_V coherence: 0.37101393344802197
-Average embedding cosine similarity weighted: 0.2478873720756488, unweighted: 0.3507106304168701
+Tuning model: stv1 at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 20
+Document: 0.6562081965219506
+Number of topics: 26
+Diversity score: 0.8115384615384615
+C_V coherence: 0.35215169036553157
+Average embedding cosine similarity weighted: 0.28627699981405613, unweighted: 0.3839665949344635
  
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 30
-Document: 0.9962300863431838
-Number of topics: 3
-Diversity score: 0.9333333333333333
-C_V coherence: 0.3689386508639383
-Average embedding cosine similarity weighted: 0.17047022939368617, unweighted: 0.34863829612731934
+Tuning model: stv1 at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 5
+Document: 0.9728809436945154
+Number of topics: 4
+Diversity score: 0.725
+C_V coherence: 0.3376676599814793
+Average embedding cosine similarity weighted: 0.12241786181740463, unweighted: 0.383168488740921
  
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 10
-Document: 0.9962300863431838
-Number of topics: 3
-Diversity score: 0.9333333333333333
-C_V coherence: 0.38600175707218315
-Average embedding cosine similarity weighted: 0.17055798207002226, unweighted: 0.36276373267173767
- 
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 20
-Document: 0.8662288702420041
-Number of topics: 11
-Diversity score: 0.8090909090909091
-C_V coherence: 0.3446146876422232
-Average embedding cosine similarity weighted: 0.2467021737773315, unweighted: 0.39947709441185
- 
-Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 30
-Document: 0.8150310105800803
-Number of topics: 13
-Diversity score: 0.8384615384615385
-C_V coherence: 0.36893449776190795
-Average embedding cosine similarity weighted: 0.2537901574588469, unweighted: 0.36677882075309753
- 
-Tuning model: mini at param combination: min_cluster_size = 10, n_components = 5, n_neighbors = 30
-Document: 0.6610726012404232
-Number of topics: 120
-Diversity score: 0.7366666666666667
-C_V coherence: 0.37035890421679873
-Average embedding cosine similarity weighted: 0.582893264653316, unweighted: 0.624347984790802
- 
-Tuning model: mini at param combination: min_cluster_size = 10, n_components = 10, n_neighbors = 30
-Document: 0.6529247233369816
-Number of topics: 121
-Diversity score: 0.7413223140495868
-C_V coherence: 0.3590330827578836
-Average embedding cosine similarity weighted: 0.587424309937775, unweighted: 0.628531277179718
- 
-Tuning model: mini at param combination: min_cluster_size = 10, n_components = 15, n_neighbors = 30
-Document: 0.6789492885808099
-Number of topics: 114
-Diversity score: 0.724561403508772
-C_V coherence: 0.3569211589373526
-Average embedding cosine similarity weighted: 0.5732624527269125, unweighted: 0.6316335797309875
- 
-Tuning model: mini at param combination: min_cluster_size = 20, n_components = 5, n_neighbors = 30
-Document: 0.6587620089991487
-Number of topics: 67
-Diversity score: 0.7835820895522388
-C_V coherence: 0.36215111583063203
-Average embedding cosine similarity weighted: 0.5482620826743726, unweighted: 0.5901798009872437
- 
-Tuning model: mini at param combination: min_cluster_size = 20, n_components = 10, n_neighbors = 30
-Document: 0.6429526936641129
-Number of topics: 68
-Diversity score: 0.775
-C_V coherence: 0.36579680339120524
-Average embedding cosine similarity weighted: 0.5509416057332062, unweighted: 0.604607105255127
- 
-Tuning model: mini at param combination: min_cluster_size = 20, n_components = 15, n_neighbors = 30
-Document: 0.6515870120394017
-Number of topics: 67
-Diversity score: 0.7686567164179104
-C_V coherence: 0.3545046952929993
-Average embedding cosine similarity weighted: 0.5552177673213381, unweighted: 0.5920484066009521
- 
-Tuning model: mini at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 30
-Document: 0.6751793749239937
-Number of topics: 43
-Diversity score: 0.7651162790697674
-C_V coherence: 0.3715505634830896
-Average embedding cosine similarity weighted: 0.5124448634555258, unweighted: 0.5699214339256287
- 
-Tuning model: mini at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 30
-Document: 0.6514654019214399
-Number of topics: 42
-Diversity score: 0.7976190476190477
-C_V coherence: 0.3709312703640806
-Average embedding cosine similarity weighted: 0.5221119045220984, unweighted: 0.5589346885681152
- 
-Tuning model: mini at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 30
-Document: 0.6732336130366047
-Number of topics: 42
-Diversity score: 0.7976190476190477
-C_V coherence: 0.359817821432492
-Average embedding cosine similarity weighted: 0.5172595844652526, unweighted: 0.5613152384757996
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 5
-Document: 0.7482670558190442
-Number of topics: 35
-Diversity score: 0.8114285714285714
-C_V coherence: 0.4038545566071214
-Average embedding cosine similarity weighted: 0.4702628649348614, unweighted: 0.49658453464508057
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 10
-Document: 0.6957314848595403
-Number of topics: 36
-Diversity score: 0.7972222222222223
-C_V coherence: 0.38046490311879944
-Average embedding cosine similarity weighted: 0.5004318967771538, unweighted: 0.5228291749954224
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 20
-Document: 0.6343183752888241
-Number of topics: 34
-Diversity score: 0.8117647058823529
-C_V coherence: 0.3655891846436282
-Average embedding cosine similarity weighted: 0.5100414832779692, unweighted: 0.5402842164039612
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 30
-Document: 0.6714094612671774
-Number of topics: 32
-Diversity score: 0.78125
-C_V coherence: 0.3627565229066724
-Average embedding cosine similarity weighted: 0.49191151477033473, unweighted: 0.5413941144943237
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 5
+Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 5
 Document: 0.7423081600389152
-Number of topics: 36
-Diversity score: 0.8222222222222222
-C_V coherence: 0.3865644559161432
-Average embedding cosine similarity weighted: 0.47539492144321394, unweighted: 0.49469566345214844
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 10
-Document: 0.9317767238234221
-Number of topics: 16
-Diversity score: 0.86875
-C_V coherence: 0.38011961346061235
-Average embedding cosine similarity weighted: 0.3491227319908964, unweighted: 0.5116972923278809
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 20
-Document: 0.6799221695245045
-Number of topics: 32
-Diversity score: 0.809375
-C_V coherence: 0.3625626126116629
-Average embedding cosine similarity weighted: 0.49471733888750785, unweighted: 0.5232963562011719
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 30
-Document: 0.6627751428918887
-Number of topics: 29
-Diversity score: 0.8586206896551725
-C_V coherence: 0.36874135824667803
-Average embedding cosine similarity weighted: 0.49867489599306647, unweighted: 0.5190589427947998
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 10
-Document: 0.6952450443876931
-Number of topics: 35
-Diversity score: 0.8
-C_V coherence: 0.37745836271495203
-Average embedding cosine similarity weighted: 0.49880187746964283, unweighted: 0.5164217352867126
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 20
-Document: 0.6991365681624712
-Number of topics: 28
-Diversity score: 0.8285714285714286
-C_V coherence: 0.3677580096681847
-Average embedding cosine similarity weighted: 0.46881063078502755, unweighted: 0.5199993848800659
- 
-Tuning model: mini at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 30
-Document: 0.6866107260124042
-Number of topics: 30
-Diversity score: 0.8
-C_V coherence: 0.35792238160909057
-Average embedding cosine similarity weighted: 0.48739834819180383, unweighted: 0.540064811706543
- 
-Tuning model: mpnet at param combination: min_cluster_size = 10, n_components = 5, n_neighbors = 30
-Document: 0.6181442295999027
-Number of topics: 117
-Diversity score: 0.7264957264957265
-C_V coherence: 0.36545414586266
-Average embedding cosine similarity weighted: 0.620316258728938, unweighted: 0.6638655066490173
- 
-Tuning model: mpnet at param combination: min_cluster_size = 10, n_components = 10, n_neighbors = 30
-Document: 0.6071993189833395
-Number of topics: 118
-Diversity score: 0.726271186440678
-C_V coherence: 0.36566100787797895
-Average embedding cosine similarity weighted: 0.6253715107728884, unweighted: 0.6586605906486511
- 
-Tuning model: mpnet at param combination: min_cluster_size = 10, n_components = 15, n_neighbors = 30
-Document: 0.6267785479751915
-Number of topics: 117
-Diversity score: 0.7282051282051282
-C_V coherence: 0.3673750885604759
-Average embedding cosine similarity weighted: 0.6213425105805539, unweighted: 0.6517363786697388
- 
-Tuning model: mpnet at param combination: min_cluster_size = 20, n_components = 5, n_neighbors = 30
-Document: 0.6811382707041226
-Number of topics: 57
-Diversity score: 0.7473684210526316
-C_V coherence: 0.3651814753210374
-Average embedding cosine similarity weighted: 0.5645901179381767, unweighted: 0.6368222832679749
- 
-Tuning model: mpnet at param combination: min_cluster_size = 20, n_components = 10, n_neighbors = 30
-Document: 0.6630183631278123
-Number of topics: 58
-Diversity score: 0.7517241379310344
-C_V coherence: 0.3598424119934681
-Average embedding cosine similarity weighted: 0.5689801369750666, unweighted: 0.6344896554946899
- 
-Tuning model: mpnet at param combination: min_cluster_size = 20, n_components = 15, n_neighbors = 30
-Document: 0.6131582147634683
-Number of topics: 64
-Diversity score: 0.7484375
-C_V coherence: 0.3596070571202933
-Average embedding cosine similarity weighted: 0.5914359606539432, unweighted: 0.6363743543624878
- 
-Tuning model: mpnet at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 30
-Document: 0.6817463212939316
-Number of topics: 40
-Diversity score: 0.775
-C_V coherence: 0.372167199406304
-Average embedding cosine similarity weighted: 0.5460814943313174, unweighted: 0.593239426612854
- 
-Tuning model: mpnet at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 30
-Document: 0.6796789492885809
-Number of topics: 42
-Diversity score: 0.7738095238095238
-C_V coherence: 0.3772098615033326
-Average embedding cosine similarity weighted: 0.5530769330835829, unweighted: 0.5995402336120605
- 
-Tuning model: mpnet at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 30
-Document: 0.6558433661680652
-Number of topics: 42
-Diversity score: 0.7904761904761904
-C_V coherence: 0.3616571231961924
-Average embedding cosine similarity weighted: 0.5618783886691712, unweighted: 0.5917688608169556
- 
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 5
-Document: 0.7531314605375167
-Number of topics: 34
-Diversity score: 0.7705882352941177
-C_V coherence: 0.38126068088006543
-Average embedding cosine similarity weighted: 0.503333365553399, unweighted: 0.5603911876678467
- 
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 10
-Document: 0.621914143256719
 Number of topics: 39
-Diversity score: 0.7871794871794872
-C_V coherence: 0.36566589977724423
-Average embedding cosine similarity weighted: 0.5562655653602032, unweighted: 0.5718638300895691
+Diversity score: 0.7564102564102564
+C_V coherence: 0.36653673044423546
+Average embedding cosine similarity weighted: 0.3367183555239814, unweighted: 0.3646940290927887
  
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 20
-Document: 0.6616806518302323
-Number of topics: 33
-Diversity score: 0.803030303030303
-C_V coherence: 0.369317303113045
-Average embedding cosine similarity weighted: 0.5415997694978555, unweighted: 0.5762810111045837
- 
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 5, n_neighbors = 30
-Document: 0.6511005715675544
-Number of topics: 33
-Diversity score: 0.806060606060606
-C_V coherence: 0.36896176970482686
-Average embedding cosine similarity weighted: 0.5444140266717526, unweighted: 0.580189049243927
- 
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 5
-Document: 0.7747780615347197
-Number of topics: 31
-Diversity score: 0.8096774193548387
-C_V coherence: 0.3735234216930918
-Average embedding cosine similarity weighted: 0.4931370037033501, unweighted: 0.535624623298645
- 
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 10
-Document: 0.7080141067736836
-Number of topics: 28
-Diversity score: 0.8142857142857143
-C_V coherence: 0.3668217329330563
-Average embedding cosine similarity weighted: 0.5097179176245551, unweighted: 0.5672893524169922
- 
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 20
-Document: 0.6335887145810531
-Number of topics: 35
-Diversity score: 0.8085714285714286
-C_V coherence: 0.3733796565261769
-Average embedding cosine similarity weighted: 0.5527848869676554, unweighted: 0.578026533126831
- 
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 10, n_neighbors = 30
-Document: 0.7362276541408245
+Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 10
+Document: 0.8436093883011067
 Number of topics: 22
-Diversity score: 0.8
-C_V coherence: 0.3661952623873939
-Average embedding cosine similarity weighted: 0.5010046063130706, unweighted: 0.5734449028968811
+Diversity score: 0.8090909090909091
+C_V coherence: 0.34974166772740384
+Average embedding cosine similarity weighted: 0.26493795135530906, unweighted: 0.42608407139778137
  
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 10
-Document: 0.804086099963517
-Number of topics: 24
-Diversity score: 0.8041666666666667
-C_V coherence: 0.36050983897930955
-Average embedding cosine similarity weighted: 0.4797343251673438, unweighted: 0.5747390985488892
+Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 5, n_neighbors = 20
+Document: 0.7738051805910252
+Number of topics: 27
+Diversity score: 0.7
+C_V coherence: 0.35820233281606456
+Average embedding cosine similarity weighted: 0.2786121020456839, unweighted: 0.5092270970344543
  
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 20
-Document: 0.7230937614009486
-Number of topics: 25
-Diversity score: 0.816
-C_V coherence: 0.3755492371787199
-Average embedding cosine similarity weighted: 0.5090493987424984, unweighted: 0.5737612247467041
+Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 5
+Document: 0.9886902590295512
+Number of topics: 7
+Diversity score: 0.8714285714285714
+C_V coherence: 0.34772450142754063
+Average embedding cosine similarity weighted: 0.17824036726249246, unweighted: 0.4213949739933014
  
-Tuning model: mpnet at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 30
-Document: 0.719567067980056
-Number of topics: 24
-Diversity score: 0.8
-C_V coherence: 0.3741064945826444
-Average embedding cosine similarity weighted: 0.5061777440835158, unweighted: 0.5785543322563171
+Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 10
+Document: 0.9062385990514411
+Number of topics: 16
+Diversity score: 0.85625
+C_V coherence: 0.3391202480865659
+Average embedding cosine similarity weighted: 0.25027234429594525, unweighted: 0.40808379650115967
+ 
+Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 10, n_neighbors = 20
+Document: 0.9834610239571933
+Number of topics: 11
+Diversity score: 0.5909090909090909
+C_V coherence: 0.3440177285124239
+Average embedding cosine similarity weighted: 0.18233340071322848, unweighted: 0.6350085139274597
+ 
+Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 10
+Document: 1.0
+Number of topics: 4
+Diversity score: 0.9
+C_V coherence: 0.3794488360962543
+Average embedding cosine similarity weighted: 0.17312571836564572, unweighted: 0.4849904775619507
+ 
+Tuning model: stv2 at param combination: min_cluster_size = 30, n_components = 15, n_neighbors = 20
+Document: 0.6756658153958409
+Number of topics: 34
+Diversity score: 0.7294117647058823
+C_V coherence: 0.3699918969681265
+Average embedding cosine similarity weighted: 0.33674136813142647, unweighted: 0.46561679244041443
+ 
+Tuning model: stv2 at param combination: min_cluster_size = 40, n_components = 15, n_neighbors = 5
+Document: 0.8719445457862094
+Number of topics: 12
+Diversity score: 0.7833333333333333
+C_V coherence: 0.387702060773875
+Average embedding cosine similarity weighted: 0.2430228802075446, unweighted: 0.35268542170524597
