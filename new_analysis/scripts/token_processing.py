@@ -3,12 +3,16 @@ import nltk
 from nltk.tokenize import word_tokenize
 import string
 from nltk.stem.snowball import SnowballStemmer
-from gensim.corpora.dictionary import Dictionary
+#from gensim.corpora.dictionary import Dictionary
+
 from typing import List, Dict
 import pandas as pd
 import spacy
 import os
 import pickle
+
+#run in terminal
+#python -m spacy download nl_core_news_sm
 
 # Download tokenizer data
 nltk.download("punkt_tab")
@@ -37,8 +41,8 @@ def lemmatize_texts(tokenized: List[List[str]]) -> List[List[str]]:
         lemmatized.append([token.lemma_ for token in doc])
     return lemmatized
 
-def build_dictionaries(data: Dict[str, List[List[str]]]) -> Dict[str, Dictionary]:
-    return {name: Dictionary(tokens) for name, tokens in data.items()}
+#def build_dictionaries(data: Dict[str, List[List[str]]]) -> Dict[str, Dictionary]:
+    #return {name: Dictionary(tokens) for name, tokens in data.items()}
 
 def save_data(data: Dict[str, object], path: str, file_ext: str = ".pkl"):
     os.makedirs(path, exist_ok=True)
@@ -55,24 +59,25 @@ def save_data(data: Dict[str, object], path: str, file_ext: str = ".pkl"):
 # ----------------------------------------
 
 if __name__ == "__main__":
-    save_path = "/workspace/persistent/mijnidbcoachnlp/data/tokens"
+    save_path = ".\\data\\tokens"
 
     # Load and clean text
-    messages_df = pd.read_excel(
-        "/workspace/persistent/mijnidbcoachnlp/data/analysis_data/translated_clean_message_data.xlsx",
-        index_col=0
-    )
-    messages = clean_texts(messages_df["clean_message"].tolist())
+    #messages_df = pd.read_excel(
+        #"/workspace/persistent/mijnidbcoachnlp/data/analysis_data/translated_clean_message_data.xlsx",
+        #index_col=0
+    #)
+    #messages = clean_texts(messages_df["clean_message"].tolist())
 
     sentences_df = pd.read_excel(
-        "/workspace/persistent/mijnidbcoachnlp/data/analysis_data/sentence_data_for_analysis.xlsx",
+        ".\\data\\sentence_data_for_analysis.xlsx",
         index_col=0
     )
     sentences = clean_texts(sentences_df["sentence"].tolist())
 
     # Process each type
+
     results = {}
-    for name, texts in {"messages": messages, "sentences": sentences}.items():
+    for name, texts in {"sentences": sentences}.items():
         tokenized = tokenize_texts(texts)
         stemmed = stem_texts(tokenized)
         lemmatized = lemmatize_texts(tokenized)
@@ -86,9 +91,11 @@ if __name__ == "__main__":
     save_data(results, save_path, file_ext=".pkl")
 
     # Build and save dictionaries
-    dicts = build_dictionaries({
-        f"{key}_dict": value for key, value in results.items()
-    })
-    save_data(dicts, save_path, file_ext=".dict")
+    #dicts = build_dictionaries({
+        #f"{key}_dict": value for key, value in results.items()
+    #})
+    #save_data(dicts, save_path, file_ext=".dict")
 
-    print("All tokens and dictionaries saved successfully.")
+    print(f"All tokens and dictionaries saved successfully to {save_path}.")
+
+
