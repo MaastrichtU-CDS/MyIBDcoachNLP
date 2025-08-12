@@ -22,9 +22,9 @@ def main():
 
     # 3) Rank by diversity_score within each model and take top 3 rows
     df = (
-        df.sort_values(["model_name", "diversity_score"], ascending=[True, False])
+        df.sort_values(["diversity_score"], ascending= [False])
           .groupby("model_name", group_keys=False)
-          .head(3)
+          .head(1)
     )
 
     # Save result
