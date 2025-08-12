@@ -18,3 +18,4 @@ chuncks/
 *.err
 checkpoints/
 *.bin
+old_analysis/
