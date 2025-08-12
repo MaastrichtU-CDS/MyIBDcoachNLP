@@ -1,8 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name=rank_models
+#SBATCH --job-name=model_metric_summary
 #SBATCH --time=00:10:00            # walltime
-#SBATCH --cpus-per-task=1          # one CPU core
-#SBATCH --mem=1G
+#SBATCH --cpus-per-task=1 
+#SBATCH -N 1
+#SBATCH --ntasks=1      # one CPU core
+#SBATCH --mem=4G
 #SBATCH --output=logs/%x_%j.out      # log file
 #SBATCH --error=logs/%x_%j.err
 
@@ -13,4 +15,4 @@ echo "Start: $(date)"
 echo "CPUs: ${SLURM_CPUS_PER_TASK}"
 source surfvenv/bin/activate
 
-srun python /scripts/rank_models.py
+srun python ./scripts/get_summary.py
