@@ -10,3 +10,11 @@ venv-gpu/
 saved_models/
 tf
 my-env-python3.10/
+surfvenv/
+logs/
+*.out
+chuncks/
+*.json
+*.err
+checkpoints/
+*.bin

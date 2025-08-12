@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.git": true,
+    "**/logs": true,
+    "**/*.npy": true,
+    "**/*.pkl": true
+  },
+  "files.watcherExclude": {
+    "**/logs/**": true,
+    "**/*.npy": true,
+    "**/*.pkl": true
+  }
+}
