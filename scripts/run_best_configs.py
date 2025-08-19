@@ -183,7 +183,7 @@ for key, value in results.items():
 # ======================
 # === Save results ===
 # ======================
-output_dir = f"./new_analysis/results/{model_name}"
+output_dir = f"./new_analysis/results/{model_name}_base"
 os.makedirs(output_dir, exist_ok=True)
 
 # Save metrics
@@ -206,7 +206,7 @@ topic_info = model.get_topic_info()
 topic_info.to_csv(os.path.join(output_dir, "topic_info.csv"), index=False)
 
 # Save document information (topics assigned to each document)
-document_info = model.get_document_info()
+document_info = model.get_document_info(docs=sentences)
 document_info.to_csv(os.path.join(output_dir, "document_info.csv"), index=False)
 
 # Save summary

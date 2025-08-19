@@ -19,3 +19,5 @@ chuncks/
 checkpoints/
 *.bin
 old_analysis/
+*2ndrun/
+*.slurm
