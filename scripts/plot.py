@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.rcParams["font.family"] = "Times New Roman"
 import os
 
 def visualize_trends_permodel(df, model_name, metrics, parameter_to_plot, main_color, output_dir="./results/graphs"):
@@ -120,10 +121,10 @@ def plot_inrange_mean_trends_all_models(df, models, metrics, parameter_to_plot, 
         elif metric == "document_coverage":
             title = "Topic Assignment Proportion"
         
-        ax.set_title(title.title())
-        ax.set_ylabel("Value")
-        ax.set_xlabel(parameter_to_plot)
-        ax.set_ylim(0.3, 0.8)
+        ax.set_title(title.title(), fontname="Times New Roman")
+        ax.set_ylabel("Value", fontname="Times New Roman")
+        ax.set_xlabel(parameter_to_plot, fontname="Times New Roman")
+        #ax.set_ylim(0.3, 0.8)
         ax.grid(True)
         ax.legend()
         if parameter_to_plot == "n_components":
@@ -135,7 +136,7 @@ def plot_inrange_mean_trends_all_models(df, models, metrics, parameter_to_plot, 
     
     # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
-    plt.savefig(f"{output_dir}/trends_{parameter_to_plot}_all_models.png")
+    plt.savefig(f"{output_dir}/trends_{parameter_to_plot}_all_models_tnr.png")
     plt.close()  # Close figure to free memory
 
 
