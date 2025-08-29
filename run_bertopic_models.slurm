@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=bertopic_configs
+#SBATCH --job-name=best_configs
 #SBATCH --output=logs/bertopic_%A_%a.out
 #SBATCH --error=logs/bertopic_%A_%a.err
 #SBATCH --array=0-2

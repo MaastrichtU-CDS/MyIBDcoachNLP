@@ -7,13 +7,15 @@ import pandas as pd
 from bertopic import BERTopic
 import pickle
 import random
+from sklearn.feature_extraction.text import CountVectorizer
+
 
 
 # Set random seed for reproducibility
 random.seed(42)
 np.random.seed(42)
 
-def reduce_outlier_for_model(topic_model, docs, embeddings):
+def reduce_outlier_for_model(topic_model, docs, embeddings, stopwords):
     """Reduce outliers for a BERTopic model"""
     # Get current topics (not from model.topics_ but from transform)
     topics = topic_model.topics_
@@ -27,31 +29,42 @@ def reduce_outlier_for_model(topic_model, docs, embeddings):
         strategy="embeddings",
         embeddings=embeddings  # Use precomputed embeddings if available
     )
-    
+
+    vectorizer_model = CountVectorizer(
+        stop_words=stopwords,
+        min_df=2,
+        ngram_range=(1, 1),
+        token_pattern=r'\b[a-zA-Z]{3,}\b'
+    )
+
     print(f"Remaining outliers after reduction: {sum(1 for t in new_topics if t == -1)}")
     
     # Update the model with new topics
-    topic_model.update_topics(docs, topics=new_topics)
+    topic_model.update_topics(docs, topics=new_topics, vectorizer_model = vectorizer_model)
     
     return topic_model
 
 def main():
     # Define model configurations - FIXED TYPO IN QWEN3 PATH
     model_paths = {
-        'mpnet': 'new_analysis/results/mpnet_base',
-        'robbert': 'new_analysis/results/robbert_base', 
-        'qwen3': 'new_analysis/results/qwen3_base'  # Fixed: removed extra 'l' and leading dot
+        'mpnet': 'new_analysis/results/models/mpnet_base_top_coherence',
+        'robbert': 'new_analysis/results/models/robbert_base_top_coherence', 
+        'qwen3': 'new_analysis/results/models/qwen3_base_top_coherence'  # Fixed: removed extra 'l' and leading dot
     }
     
     # Load data once
     data = pd.read_excel("./data/sentence_data_for_analysis.xlsx", index_col=0)
     sentences = data["sentence"].to_list()
+    # Load stopwords
+    with open('./data/stopwords-nl-extended.txt', 'r') as file:
+        dutch_stopwords = [line.strip() for line in file.readlines()]
+
 
     for model_name in model_paths.keys():
         print(f"\n=== Processing {model_name} model ===")
         
         # Create output dir
-        output_dir = f"./new_analysis/results/{model_name}_reduced"
+        output_dir = f"./new_analysis/results/models/{model_name}_reduced_top_coherence"
         os.makedirs(output_dir, exist_ok=True)
 
         try:
@@ -66,8 +79,9 @@ def main():
                 embedding_model = "Qwen/qwen3-embedding-8b"
             
             print(f"Loading model from {model_path}")
-            topic_model = BERTopic.load(model_path, embedding_model=embedding_model)
+            topic_model = BERTopic.load(model_path, embedding_model=None)
             print("Model loaded successfully")
+
             
             # Load precomputed embeddings if available
             embeddings_path = f"./data/embeddings_{model_name}.npy"
@@ -83,7 +97,8 @@ def main():
             topic_model_reduced = reduce_outlier_for_model(
                 topic_model=topic_model, 
                 docs=sentences,
-                embeddings=embeddings
+                embeddings=embeddings,
+                stopwords=dutch_stopwords
             )
             
             # Get updated information

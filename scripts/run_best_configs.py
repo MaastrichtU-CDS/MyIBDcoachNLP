@@ -17,9 +17,9 @@ import pickle
 # === Configuration ===
 # ======================
 CONFIGS = {
-    "mpnet": {"min_cluster_size": 25, "n_components": 7, "n_neighbors": 10},
-    "robbert": {"min_cluster_size": 30, "n_components": 10, "n_neighbors": 10},
-    "qwen3": {"min_cluster_size": 40, "n_components": 15, "n_neighbors": 10}
+    "mpnet": {"min_cluster_size": 20, "n_components": 15, "n_neighbors": 10},
+    "robbert": {"min_cluster_size": 25, "n_components": 10, "n_neighbors": 10},
+    "qwen3": {"min_cluster_size": 30, "n_components": 5, "n_neighbors": 10}
 }
 
 # ======================
@@ -183,7 +183,7 @@ for key, value in results.items():
 # ======================
 # === Save results ===
 # ======================
-output_dir = f"./new_analysis/results/{model_name}_base"
+output_dir = f"./new_analysis/results/models/{model_name}_base_top_coherence"
 os.makedirs(output_dir, exist_ok=True)
 
 # Save metrics

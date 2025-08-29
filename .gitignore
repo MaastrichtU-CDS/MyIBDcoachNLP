@@ -20,4 +20,6 @@ checkpoints/
 *.bin
 old_analysis/
 *2ndrun/
+models_other_use/*
 *.slurm
+/home/jzhang/mijnidbcoachnlp/new_analysis/results/models/models_other_use/

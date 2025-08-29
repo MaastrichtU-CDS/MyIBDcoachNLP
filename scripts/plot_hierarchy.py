@@ -23,9 +23,9 @@ def get_hierarchical_topics(topic_model, docs):
 def main():
     # Define model configurations - FIXED TYPO IN QWEN3 PATH
     model_paths = {
-        'mpnet': 'new_analysis/results/models/mpnet_reduced',
-        'robbert': 'new_analysis/results/models/robbert_reduced' 
-        #'qwen3': 'new_analysis/results/models/qwen3_reduced'  # Fixed: removed extra 'l' and leading dot
+        'mpnet': 'new_analysis/results/models/mpnet_reduced_top_diversity',
+        'robbert': 'new_analysis/results/models/robbert_reduced_top_diversity', 
+        'qwen3': 'new_analysis/results/models/qwen3_reduced_top_diversity'  # Fixed: removed extra 'l' and leading dot
     }
     
     # Load data once
@@ -36,7 +36,7 @@ def main():
         print(f"\n=== Processing {model_name} model ===")
         
         # Create output dir
-        output_dir = f"./new_analysis/results"
+        output_dir = f"./new_analysis/results/graphs"
         os.makedirs(output_dir, exist_ok=True)
 
         try:

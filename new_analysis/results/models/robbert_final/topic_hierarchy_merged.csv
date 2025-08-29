@@ -1,0 +1,143 @@
+Parent_ID,Parent_Name,Topics,Child_Left_ID,Child_Left_Name,Child_Right_ID,Child_Right_Name,Distance
+284,ontlasting_beste_graag_bloed_hallo,"[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142]",282,pijn_last_buikpijn_slijm_toilet,283,graag_afspraak_beste_hallo_bedankt,1.8968095734294097
+283,graag_afspraak_beste_hallo_bedankt,"[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 19, 20, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 37, 39, 43, 44, 46, 47, 48, 49, 50, 54, 55, 57, 58, 59, 61, 62, 63, 64, 65, 68, 69, 73, 74, 75, 76, 78, 79, 81, 82, 83, 84, 88, 89, 90, 91, 92, 93, 95, 97, 99, 100, 101, 102, 103, 104, 105, 106, 107, 110, 112, 114, 116, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 130, 131, 132, 133, 134, 135, 136, 137, 139, 140, 141]",273,apotheek_recept_locatie_nieuw_pentasa,281,afspraak_laten_bedankt_prikken_uitslag,1.558785447713444
+282,pijn_last_buikpijn_slijm_toilet,"[12, 18, 21, 22, 23, 31, 36, 38, 40, 41, 42, 45, 51, 52, 53, 56, 60, 66, 67, 70, 71, 72, 77, 80, 85, 86, 87, 94, 96, 98, 108, 109, 111, 113, 115, 117, 129, 138, 142]",278,pijn_last_voel_buik_buikpijn,168,slijm_toilet_ontlasting_bloed_soms,1.4404737668722516
+281,afspraak_laten_bedankt_prikken_uitslag,"[0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 13, 14, 15, 19, 20, 24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 37, 39, 44, 46, 47, 48, 50, 54, 55, 57, 59, 61, 62, 63, 64, 65, 73, 74, 76, 78, 79, 81, 82, 83, 84, 88, 90, 91, 92, 93, 95, 97, 99, 100, 101, 103, 104, 105, 106, 107, 110, 112, 114, 116, 119, 122, 123, 124, 125, 126, 127, 128, 130, 132, 133, 134, 135, 139, 140, 141]",279,afspraak_uitslag_prikken_bloed_laten,280,bedankt_dank_humira_reactie_infuus,1.3963491378500827
+280,bedankt_dank_humira_reactie_infuus,"[0, 7, 10, 13, 15, 19, 20, 24, 25, 28, 30, 32, 33, 34, 35, 37, 39, 46, 47, 50, 54, 57, 59, 61, 62, 63, 64, 65, 74, 76, 78, 79, 81, 84, 88, 90, 92, 93, 95, 97, 99, 100, 101, 103, 105, 106, 107, 110, 112, 114, 116, 122, 123, 124, 125, 126, 127, 128, 130, 132, 133, 134, 135, 139, 140, 141]",271,bedankt_dank_reactie_alvast_hoor,274,humira_infuus_crohn_medicatie_klachten,1.3052020918763896
+279,afspraak_uitslag_prikken_bloed_laten,"[1, 2, 3, 4, 6, 8, 9, 11, 14, 26, 27, 29, 44, 48, 55, 73, 82, 83, 91, 104, 119]",277,prikken_uitslag_bloed_ontlasting_test,266,afspraak_poli_bellen_telefonisch_gebeld,1.2872156407321316
+278,pijn_last_voel_buik_buikpijn,"[21, 23, 31, 36, 38, 40, 41, 42, 45, 52, 53, 56, 60, 66, 67, 70, 71, 72, 77, 80, 85, 86, 87, 94, 96, 98, 108, 111, 113, 115, 117, 129, 138, 142]",276,voel_koorts_eten_gaat_moe,259,pijn_buikpijn_buik_diarree_last,1.270691138842161
+277,prikken_uitslag_bloed_ontlasting_test,"[1, 4, 6, 9, 11, 14, 44, 82, 83, 119]",240,ibd_sessie_vragenlijst_ingevuld_periodieke,238,prikken_uitslag_bloed_ontlasting_test,1.2591313196990395
+276,voel_koorts_eten_gaat_moe,"[21, 31, 38, 40, 45, 52, 56, 66, 71, 72, 80, 85, 86, 87, 94, 96, 98, 108, 111, 113, 115, 129, 138, 142]",275,koorts_eten_anus_vermoeidheid_ontsteking,215,voel_gaat_beter_moe_goed,1.2478621594558341
+275,koorts_eten_anus_vermoeidheid_ontsteking,"[31, 45, 52, 66, 71, 72, 80, 85, 86, 87, 94, 96, 98, 108, 111, 113, 115, 129, 138, 142]",261,eten_eet_drinken_misselijk_picoprep,270,koorts_anus_ontsteking_vermoeidheid_ogen,1.231029007635588
+274,humira_infuus_crohn_medicatie_klachten,"[7, 10, 13, 15, 19, 20, 25, 28, 30, 34, 35, 37, 39, 46, 50, 59, 61, 62, 63, 65, 76, 78, 79, 81, 84, 88, 92, 93, 95, 97, 99, 100, 101, 105, 106, 107, 112, 114, 116, 122, 123, 124, 125, 126, 128, 130, 132, 133, 134, 135, 139, 140, 141]",267,humira_infuus_medicatie_prednison_spuit,272,crohn_klachten_advies_corona_paracetamol,1.212557922422471
+273,apotheek_recept_locatie_nieuw_pentasa,"[5, 16, 17, 43, 49, 58, 68, 69, 75, 89, 102, 118, 120, 121, 131, 136, 137]",188,pentasa_zetpillen_beclometason_granulaat_korrels,269,apotheek_recept_locatie_nieuw_ziekenhuis,1.1870718813885388
+272,crohn_klachten_advies_corona_paracetamol,"[15, 19, 25, 28, 30, 34, 35, 37, 39, 46, 61, 65, 76, 78, 79, 84, 88, 93, 95, 97, 99, 101, 106, 107, 114, 116, 122, 123, 124, 125, 126, 128, 130, 133, 139, 140]",265,paracetamol_advies_dermatoloog_reumatoloog_echo,268,crohn_klachten_corona_ziekte_vaccinatie,1.1638435934120221
+271,bedankt_dank_reactie_alvast_hoor,"[0, 24, 32, 33, 47, 54, 57, 64, 74, 90, 103, 110, 127]",148,bedankt_dank_reactie_alvast_snelle,262,onderzoek_vraag_mee_vragen_sorry,1.1637150591411731
+270,koorts_anus_ontsteking_vermoeidheid_ogen,"[31, 52, 66, 72, 80, 85, 86, 87, 94, 96, 98, 108, 111, 138, 142]",255,koorts_vermoeidheid_hoofdpijn_hoesten_keel,256,anus_ontsteking_ogen_huid_aambeien,1.1523047726568372
+269,apotheek_recept_locatie_nieuw_ziekenhuis,"[5, 16, 17, 43, 58, 69, 75, 89, 102, 118, 121, 131, 136, 137]",249,thiosix_purinethol_tabletten_puri_nethol,176,apotheek_locatie_recept_ziekenhuis_sturen,1.1380830761181078
+268,crohn_klachten_corona_ziekte_vaccinatie,"[15, 19, 25, 28, 37, 39, 46, 65, 76, 78, 84, 93, 106, 116, 128, 133, 139, 140]",263,crohn_klachten_ziekte_werk_colitis,227,corona_vaccinatie_vaccin_covid_getest,1.1286008261045237
+267,humira_infuus_medicatie_prednison_spuit,"[7, 10, 13, 20, 50, 59, 62, 63, 81, 92, 100, 105, 112, 132, 134, 135, 141]",251,humira_infuus_spuit_spuiten_injectie,260,prednison_medicatie_prednisolon_antibiotica_medicijnen,1.1155327510402548
+266,afspraak_poli_bellen_telefonisch_gebeld,"[2, 3, 8, 26, 27, 29, 48, 55, 73, 91, 104]",196,afspraak_bellen_poli_telefonisch_contact,257,endoscopie_mri_darmen_operatie_darm,1.1124496512173747
+265,paracetamol_advies_dermatoloog_reumatoloog_echo,"[30, 34, 35, 61, 79, 88, 95, 97, 99, 101, 107, 114, 122, 123, 124, 125, 126, 130]",264,echo_urine_zwanger_gynaecoloog_zwangerschap,258,paracetamol_advies_dermatoloog_reumatoloog_dermatologie,1.1085264064460782
+264,echo_urine_zwanger_gynaecoloog_zwangerschap,"[30, 34, 88, 95, 97, 101, 107, 122, 123, 125, 126, 130]",252,foto_gehoord_proberen_longen_mis,253,echo_urine_zwanger_gynaecoloog_zwangerschap,1.0960128272410963
+263,crohn_klachten_ziekte_werk_colitis,"[15, 19, 25, 28, 39, 46, 76, 78, 84, 93, 106, 128, 133, 139, 140]",250,klachten_vakantie_hoop_diaree_zorgen,254,crohn_ziekte_werk_colitis_stress,1.0719838639511485
+262,onderzoek_vraag_mee_vragen_sorry,"[24, 32, 33, 47, 54, 57, 64, 74, 90, 103, 127]",236,vraag_vragen_sorry_excuses_vraagje,239,onderzoek_mee_bevolkingsonderzoek_darmkanker_hiermee,1.0708711344702577
+261,eten_eet_drinken_misselijk_picoprep,"[45, 71, 113, 115, 129]",199,picoprep_drinken_liter_drink_moviprep,192,eten_eet_misselijk_eetlust_voeding,1.070040599761997
+260,prednison_medicatie_prednisolon_antibiotica_medicijnen,"[10, 20, 50, 59, 81, 92, 105, 134, 141]",244,prednison_prednisolon_cortiment_klysma_klysmas,212,medicatie_antibiotica_medicijnen_medicijn_bijwerkingen,1.0566573264261725
+259,pijn_buikpijn_buik_diarree_last,"[23, 36, 41, 42, 53, 60, 67, 70, 77, 117]",246,buikpijn_diarree_krampen_last_nacht,159,pijn_buik_gewrichten_onderbuik_rug,1.0561679475854686
+258,paracetamol_advies_dermatoloog_reumatoloog_dermatologie,"[35, 61, 79, 99, 114, 124]",182,dermatoloog_dermatologie_verwijzing_doorverwijzing_verwijsbrief,235,paracetamol_advies_reumatoloog_tramadol_helpen,1.0531059062735812
+257,endoscopie_mri_darmen_operatie_darm,"[26, 27, 29, 48, 55, 91, 104]",154,darmen_darmonderzoek_darm_dikke_darmklachten,228,endoscopie_mri_operatie_scan_scopie,1.0527334731833384
+256,anus_ontsteking_ogen_huid_aambeien,"[31, 72, 80, 86, 87, 94, 138, 142]",241,ontsteking_ogen_huid_tandarts_jeuk,185,anus_aambeien_fistel_aambei_abces,1.0458898132332912
+255,koorts_vermoeidheid_hoofdpijn_hoesten_keel,"[52, 66, 85, 96, 98, 108, 111]",230,vermoeidheid_hoofdpijn_duizelig_duizeligheid_sporten,223,koorts_hoesten_keel_keelpijn_verhoging,1.0455012522523432
+254,crohn_ziekte_werk_colitis_stress,"[25, 46, 78, 93, 106, 133, 139]",243,crohn_ziekte_colitis_ulcerosa_risico,220,werk_stress_werken_psycholoog_werkgever,1.0447773986124431
+253,echo_urine_zwanger_gynaecoloog_zwangerschap,"[34, 95, 123, 126, 130]",191,urine_blaasontsteking_blaas_nier_galblaas,218,zwanger_gynaecoloog_echo_zwangerschap_bevallen,1.0416205275259949
+252,foto_gehoord_proberen_longen_mis,"[30, 88, 97, 101, 107, 122, 125]",247,gehoord_proberen_mis_vernomen_nakijken,197,foto_longen_longfoto_longarts_bestand,1.0347533803071343
+251,humira_infuus_spuit_spuiten_injectie,"[7, 13, 62, 63, 100, 112, 132, 135]",237,infuus_ijzer_infliximab_ustekinumab_vedolizumab,203,humira_spuit_spuiten_injectie_zetten,1.033964565023053
+250,klachten_vakantie_hoop_diaree_zorgen,"[15, 19, 28, 39, 76, 84, 128, 140]",245,diaree_opvlamming_kilo_zorgen_gewicht,213,klachten_vakantie_hoop_wacht_lang,1.0333437047878387
+249,thiosix_purinethol_tabletten_puri_nethol,"[16, 43, 58, 75, 89, 102, 118, 121, 131, 136, 137]",173,azathioprine_tabletten_daags_tablet_omeprazol,248,thiosix_purinethol_puri_nethol_nieuw,1.0250294595157359
+248,thiosix_purinethol_puri_nethol_nieuw,"[43, 75, 89, 118, 121, 131, 136, 137]",216,mezavant_salofalk_stix_granu_mesalazine,242,purinethol_thiosix_puri_nethol_nieuw,1.0076839317389963
+247,gehoord_proberen_mis_vernomen_nakijken,"[30, 88, 97, 101, 122]",97,gehoord_vernomen_heden_hierover_helaas,234,proberen_mis_nakijken_gegaan_gebeurd,1.0017972212173543
+246,buikpijn_diarree_krampen_last_nacht,"[41, 53, 60, 67, 70, 77, 117]",198,buikpijn_diarree_krampen_last_buikgriep,169,slaap_slapen_nacht_wakker_bed,0.999586992010782
+245,diaree_opvlamming_kilo_zorgen_gewicht,"[76, 84, 128, 140]",219,kilo_zorgen_gewicht_afgevallen_weeg,231,diaree_opvlamming_waterdunne_azitromycine_waterige,0.9990639737605244
+244,prednison_prednisolon_cortiment_klysma_klysmas,"[20, 59, 81, 134, 141]",179,klysma_klysmas_budenofalk_schuimklysma_gebruiken,233,prednison_prednisolon_cortiment_entocort_afbouwen,0.9988109575178103
+243,crohn_ziekte_colitis_ulcerosa_risico,"[25, 78, 93, 133]",206,crohn_colitis_ziekte_ulcerosa_colitus,186,risico_verzekering_risicogroep_zorgverzekering_aanvraag,0.9983083364853177
+242,purinethol_thiosix_puri_nethol_nieuw,"[43, 75, 89, 118, 131, 136]",222,purinethol_thiosix_puri_nethol_nieuw,200,vezels_psylliumvezels_metamucil_suikervrij_orange,0.9968144836335003
+241,ontsteking_ogen_huid_tandarts_jeuk,"[31, 80, 86, 87, 94, 142]",217,ontsteking_ogen_tandarts_mond_oogarts,209,huid_jeuk_zalf_gezicht_rode,0.9937243020753952
+240,ibd_sessie_vragenlijst_ingevuld_periodieke,"[44, 82, 83, 119]",144,ibd_periodieke_ibdcoach_vragenlijst_gezondheidscheck,177,sessie_vragenlijst_ingevuld_invullen_inloggen,0.9915920787366219
+239,onderzoek_mee_bevolkingsonderzoek_darmkanker_hiermee,"[24, 32, 57, 64, 103, 127]",214,mee_hiermee_weet_hieraan_geregeld,174,onderzoek_bevolkingsonderzoek_darmkanker_meedoen_mee,0.9855052646913235
+238,prikken_uitslag_bloed_ontlasting_test,"[1, 4, 6, 9, 11, 14]",202,prikken_bloed_uitslag_ontlasting_uitslagen,165,calprotectine_test_waarde_thuistest_app,0.981549893485902
+237,infuus_ijzer_infliximab_ustekinumab_vedolizumab,"[13, 63, 100, 132, 135]",135,infusiecentrum_infusie_infusen_gecombineerd_zeiden,232,infuus_ijzer_infliximab_ustekinumab_vedolizumab,0.980898199854651
+236,vraag_vragen_sorry_excuses_vraagje,"[33, 47, 54, 74, 90]",90,excuses_sorry_late_vele_ongemak,208,vraag_vragen_vraagje_mogelijk_melden,0.9781312982973399
+235,paracetamol_advies_reumatoloog_tramadol_helpen,"[35, 61, 99, 114]",225,paracetamol_reumatoloog_tramadol_amitriptyline_helpt,221,advies_helpen_adviseren_graag_tips,0.9771336007527605
+234,proberen_mis_nakijken_gegaan_gebeurd,"[30, 88, 101, 122]",229,proberen_mis_gegaan_gebeurd_helaas,122,nakijken_aub_verlengen_aanpassen_kijken,0.9764115773032818
+233,prednison_prednisolon_cortiment_entocort_afbouwen,"[20, 81, 141]",141,entocort_capsules_afbouwen_gestart_stoppen,210,prednison_prednisolon_cortiment_afbouwen_afgebouwd,0.9728319739366881
+232,infuus_ijzer_infliximab_ustekinumab_vedolizumab,"[13, 63, 100, 132]",226,infuus_ijzer_infliximab_vedolizumab_remicade,100,ustekinumab_ustekinimab_the_and_injection,0.970661064850143
+231,diaree_opvlamming_waterdunne_azitromycine_waterige,"[128, 140]",128,opvlamming_broeien_angst_voelt_zien,140,diaree_waterdunne_azitromycine_waterige_cholesterol,0.9697724897712275
+230,vermoeidheid_hoofdpijn_duizelig_duizeligheid_sporten,"[85, 96, 111]",111,sporten_sport_conditie_wandelen_lichamelijke,178,vermoeidheid_hoofdpijn_duizelig_duizeligheid_vermoeidheidsklachten,0.9644148714250933
+229,proberen_mis_gegaan_gebeurd_helaas,"[30, 88, 101]",88,proberen_geprobeerd_lukt_bewust_voorkeur,181,mis_gegaan_gebeurd_fout_helaas,0.9634494058218733
+228,endoscopie_mri_operatie_scan_scopie,"[26, 29, 55, 91, 104]",224,endoscopie_mri_operatie_scan_scopie,104,stoma_stomaverpleegkundige_verwijderd_operatie_darm,0.9606519412730244
+227,corona_vaccinatie_vaccin_covid_getest,"[37, 65, 116]",116,griepprik_griepspuit_waterpokken_griep_oproep,163,corona_vaccinatie_vaccin_covid_getest,0.9558095217313679
+226,infuus_ijzer_infliximab_vedolizumab_remicade,"[13, 63, 132]",187,infuus_ijzer_infliximab_vedolizumab_remicade,132,stelara_sterlara_injectie_stellara_stelera,0.9553823038990397
+225,paracetamol_reumatoloog_tramadol_amitriptyline_helpt,"[61, 99]",61,paracetamol_tramadol_amitriptyline_helpt_ibuprofen,99,reumatoloog_reumatologie_artrose_fibromyalgie_hematoloog,0.9509169598561035
+224,endoscopie_mri_operatie_scan_scopie,"[26, 29, 55, 91]",55,mri_scan_uitslag_gemaakt_gepland,204,endoscopie_operatie_coloscopie_scopie_chirurg,0.9480484987268198
+223,koorts_hoesten_keel_keelpijn_verhoging,"[52, 66, 98, 108]",171,koorts_hoesten_keel_keelpijn_griep,207,temperatuur_verhoging_kortademigheid_koud_graden,0.9475910260747662
+222,purinethol_thiosix_puri_nethol_nieuw,"[43, 75, 118, 136]",211,questran_maagbeschermer_cholestagel_maagbeschermers_kalktabletten,190,purinethol_thiosix_puri_nethol_nieuw,0.9473795449303521
+221,advies_helpen_adviseren_graag_tips,"[35, 114]",114,helpen_betekenen_hoop_hiermee_inplannen,35,advies_adviseren_graag_tips_adviezen,0.9452921561757205
+220,werk_stress_werken_psycholoog_werkgever,"[46, 106, 139]",175,werk_stress_werken_werkgever_thuis,139,psycholoog_psychiatrie_maatschappelijk_leren_medisch,0.9427693952771043
+219,kilo_zorgen_gewicht_afgevallen_weeg,"[76, 84]",76,kilo_gewicht_afgevallen_weeg_gewichtsverlies,84,zorgen_bang_ongerust_begin_angstig,0.9415963927916173
+218,zwanger_gynaecoloog_echo_zwangerschap_bevallen,"[34, 123, 126]",123,leverwaardes_lever_leverwaarden_leverarts_verhoogde,205,zwanger_gynaecoloog_echo_zwangerschap_bevallen,0.9395471842513036
+217,ontsteking_ogen_tandarts_mond_oogarts,"[86, 87, 94]",94,tandarts_mond_tong_tandvlees_kaakchirurg,195,ogen_ontsteking_oogarts_ontstekingen_oog,0.9387398950505386
+216,mezavant_salofalk_stix_granu_mesalazine,"[121, 137]",137,salofalk_stix_granu_mesalazine_granulaat,121,mezavant_mesavant_mesalazine_calcium_vitamine,0.9384562600810721
+215,voel_gaat_beter_moe_goed,"[21, 38, 40, 56]",160,voel_moe_energie_vermoeid_echt,145,gaat_beter_goed_slechter_ging,0.9376958449940525
+214,mee_hiermee_weet_hieraan_geregeld,"[24, 32, 64, 103]",103,mening_denken_akkoord_hierover_achteraan,180,mee_hiermee_weet_hieraan_geregeld,0.9332614596650558
+213,klachten_vakantie_hoop_wacht_lang,"[15, 19, 28, 39]",201,klachten_hoop_wacht_lang_afwachten,39,vakantie_vertrek_nederland_reizen_zuid,0.9305546917722839
+212,medicatie_antibiotica_medicijnen_medicijn_bijwerkingen,"[10, 50, 92, 105]",184,medicatie_antibiotica_medicijnen_medicijn_kuur,92,bijwerkingen_ciclosporine_effect_zeer_hoge,0.9298369547682881
+211,questran_maagbeschermer_cholestagel_maagbeschermers_kalktabletten,"[118, 136]",136,questran_cholestagel_nieuw_recept_zorginstelling,118,maagbeschermer_maagbeschermers_kalktabletten_nieuw_maagzuur,0.9285886679739872
+210,prednison_prednisolon_cortiment_afbouwen_afgebouwd,"[20, 81]",20,prednison_prednisolon_afgebouwd_afbouwschema_afbouwen,81,cortiment_afbouwen_stoppen_slik_beclometason,0.9262276615923891
+209,huid_jeuk_zalf_gezicht_rode,"[31, 80, 142]",172,huid_zalf_jeuk_gezicht_rode,142,haaruitval_haren_kale_hoofdhuid_haarzakjes,0.9260945545812481
+208,vraag_vragen_vraagje_mogelijk_melden,"[33, 47, 54, 74]",194,vraag_vragen_vraagje_melden_doorgeven,74,mogelijk_mogelijkheden_hoor_alternatief_optie,0.9207602153492804
+207,temperatuur_verhoging_kortademigheid_koud_graden,"[98, 108]",108,verhoging_gezakt_laag_percentage_bloeddruk,98,temperatuur_kortademigheid_koud_warm_temp,0.9202926624632618
+206,crohn_colitis_ziekte_ulcerosa_colitus,"[25, 93]",93,colitis_ulcerosa_colitus_collitis_symptomen,25,crohn_ziekte_bechterew_reuma_rustig,0.9150981742639143
+205,zwanger_gynaecoloog_echo_zwangerschap_bevallen,"[34, 126]",126,echo_hartje_zien_kloppend_bovenbuik,34,zwanger_gynaecoloog_zwangerschap_bevallen_miskraam,0.9079000530765875
+204,endoscopie_operatie_coloscopie_scopie_chirurg,"[26, 29, 91]",26,endoscopie_coloscopie_colonscopie_gastroscopie_afdeling,189,operatie_scopie_chirurg_geopereerd_chirurgie,0.9052660746382356
+203,humira_spuit_spuiten_injectie_zetten,"[7, 62, 112]",170,humira_spuit_spuiten_injectie_zetten,112,foliumzuur_multivitamine_mtx_folium_herhaalrecept,0.9027546456210602
+202,prikken_bloed_uitslag_ontlasting_uitslagen,"[1, 4, 6, 9]",153,formulieren_ontvangen_formulier_brief_mail,147,prikken_uitslag_bloed_ontlasting_uitslagen,0.902371919726995
+201,klachten_hoop_wacht_lang_afwachten,"[15, 19, 28]",19,klachten_verergerd_erger_verminderd_toenemen,167,hoop_wacht_lang_afwachten_hoogte,0.9020353134313347
+200,vezels_psylliumvezels_metamucil_suikervrij_orange,"[89, 131]",89,psylliumvezels_metamucil_suikervrij_teva_orange,131,vezels_zakjes_betere_drinken_volcolon,0.901678465585269
+199,picoprep_drinken_liter_drink_moviprep,"[113, 129]",129,picoprep_moviprep_voorbereiding_opgehaald_zakjes,113,drinken_liter_drink_water_gedronken,0.8995371447385121
+198,buikpijn_diarree_krampen_last_buikgriep,"[41, 53, 60, 77, 117]",53,diarree_buikgriep_buikpijn_overgeven_water,193,buikpijn_krampen_last_opgeblazen_buikkrampen,0.8961386761099563
+197,foto_longen_longfoto_longarts_bestand,"[107, 125]",107,foto_bestand_beeld_groot_bijgevoegd,125,longen_longarts_longfoto_longontsteking_hart,0.8956582630777083
+196,afspraak_bellen_poli_telefonisch_contact,"[2, 3, 8, 73]",73,controle_controles_afspraak_controlestrook_jaarlijkse,158,afspraak_poli_bellen_telefonisch_contact,0.8954128766194668
+195,ogen_ontsteking_oogarts_ontstekingen_oog,"[86, 87]",86,ontsteking_ontstekingen_actief_genezen_reuma,87,ogen_oogarts_oog_wijsheid_oogontsteking,0.8918436957929221
+194,vraag_vragen_vraagje_melden_doorgeven,"[33, 47, 54]",166,melden_doorgeven_wilde_weten_bespreken,33,vraag_vragen_vraagje_vraagjes_tweetal,0.8888637184739656
+193,buikpijn_krampen_last_opgeblazen_buikkrampen,"[41, 60, 77, 117]",161,buikpijn_opgeblazen_gevoel_last_buik,183,krampen_last_buikkrampen_buikklachten_kramp,0.884092798065017
+192,eten_eet_misselijk_eetlust_voeding,"[45, 71, 115]",155,eten_eet_misselijk_eetlust_gegeten,115,voeding_lactose_dietiste_intolerantie_dieet,0.8833013166965199
+191,urine_blaasontsteking_blaas_nier_galblaas,"[95, 130]",130,blaasontsteking_blaas_galblaas_blaasjes_coli,95,urine_nier_nieren_urinekweek_urineweginfectie,0.8827038003273359
+190,purinethol_thiosix_puri_nethol_nieuw,"[43, 75]",43,purinethol_puri_nethol_nieuw_recept,75,thiosix_herhaalrecept_nieuw_recept_calcium,0.8777684106571673
+189,operatie_scopie_chirurg_geopereerd_chirurgie,"[29, 91]",91,scopie_gepland_sedatie_staat_plaatsvinden,29,operatie_chirurg_geopereerd_chirurgie_anesthesist,0.8756307271749043
+188,pentasa_zetpillen_beclometason_granulaat_korrels,"[49, 68, 120]",149,zetpillen_beclometason_pillen_beclomethason_beclametason,49,pentasa_granulaat_korrels_zetpillen_pentaza,0.8753984592704148
+187,infuus_ijzer_infliximab_vedolizumab_remicade,"[13, 63]",63,ijzer_ijzerinfuus_ijzergehalte_ijzertekort_laag,13,infuus_infliximab_vedolizumab_remicade_entyvio,0.872896257094194
+186,risico_verzekering_risicogroep_zorgverzekering_aanvraag,"[78, 133]",78,verzekering_zorgverzekering_risico_aanvraag_uwv,133,risicogroep_risico_val_behoor_groep,0.8725959871455444
+185,anus_aambeien_fistel_aambei_abces,"[72, 138]",72,anus_fistel_abces_pijn_branderig,138,aambeien_aambei_inwendige_vagina_dacht,0.8723224440882609
+184,medicatie_antibiotica_medicijnen_medicijn_kuur,"[10, 50, 105]",50,antibiotica_kuur_antibioticakuur_bacterie_probiotica,162,medicatie_medicijnen_medicijn_stoppen_gebruiken,0.8631718798783367
+183,krampen_last_buikkrampen_buikklachten_kramp,"[60, 77]",60,last_overdag_soms_winderigheid_aandrang,77,krampen_buikkrampen_buikklachten_kramp_flinke,0.8623965671395347
+182,dermatoloog_dermatologie_verwijzing_doorverwijzing_verwijsbrief,"[79, 124]",79,dermatoloog_dermatologie_doorverwijzing_verwijzing_verwijsbrief,124,verwijzing_verwijsbrief_doorverwijzing_verwijs_bijsluiter,0.8613019447457221
+181,mis_gegaan_gebeurd_fout_helaas,"[30, 101]",30,gebeurd_helaas_oplossen_gelukt_heden,101,mis_gegaan_fout_misgegaan_hand,0.8578287066215021
+180,mee_hiermee_weet_hieraan_geregeld,"[24, 32, 64]",156,hiermee_mee_weet_hieraan_geregeld,64,oorzaak_reden_komt_mee_gevolgen,0.8516537013219815
+179,klysma_klysmas_budenofalk_schuimklysma_gebruiken,"[59, 134]",59,klysma_klysmas_schuimklysma_gebruikt_klisma,134,budenofalk_budesonide_stoppen_bijsluiter_day,0.8485660568105057
+178,vermoeidheid_hoofdpijn_duizelig_duizeligheid_vermoeidheidsklachten,"[85, 96]",96,vermoeidheid_vermoeidheidsklachten_last_aanwezig_mentaal,85,hoofdpijn_duizelig_duizeligheid_hoofd_migraine,0.8471604824871041
+177,sessie_vragenlijst_ingevuld_invullen_inloggen,"[82, 83]",83,vragenlijst_ingevuld_invullen_vragenlijsten_vullen,82,sessie_inloggen_sessies_account_melding,0.8431304048109503
+176,apotheek_locatie_recept_ziekenhuis_sturen,"[5, 17, 69]",152,apotheek_recept_locatie_sturen_nieuw,17,ziekenhuis_opgenomen_locatie_langs_huis,0.8358210467939984
+175,werk_stress_werken_werkgever_thuis,"[46, 106]",46,werk_werken_werkgever_thuis_stage,106,stress_rol_periode_stressvolle_werk,0.833570076949276
+174,onderzoek_bevolkingsonderzoek_darmkanker_meedoen_mee,"[57, 127]",127,meedoen_mee_meewerken_hieraan_deel,57,onderzoek_bevolkingsonderzoek_darmkanker_onderzoeken_meedoen,0.8310311659445094
+173,azathioprine_tabletten_daags_tablet_omeprazol,"[16, 58, 102]",102,azathioprine_daags_tablet_compres_klinion,157,tabletten_daags_omeprazol_esomeprazol_tablet,0.8296871156540921
+172,huid_zalf_jeuk_gezicht_rode,"[31, 80]",80,zalf_creme_smeren_gesmeerd_lidocaine,31,huid_gezicht_jeuk_rode_jeukt,0.8285365136174486
+171,koorts_hoesten_keel_keelpijn_griep,"[52, 66]",66,keel_hoesten_keelpijn_hoest_neus,52,koorts_griep_verkoudheid_verkouden_ziek,0.8235497309069704
+170,humira_spuit_spuiten_injectie_zetten,"[7, 62]",7,humira_spuit_spuiten_injectie_zetten,62,vitamine_vitamines_vit_doorsturen_spuit,0.8085710076147592
+169,slaap_slapen_nacht_wakker_bed,"[67, 70]",67,nacht_ochtend_ene_loop_avond,70,slaap_slapen_wakker_bed_geslapen,0.8071941689706943
+168,slijm_toilet_ontlasting_bloed_soms,"[12, 18, 22, 51, 109]",143,toilet_vaker_rennen_keer_buikpijn,164,slijm_ontlasting_bloed_soms_bloedverlies,0.8059551942135726
+167,hoop_wacht_lang_afwachten_hoogte,"[15, 28]",28,lang_maanden_jaar_wachten_duurt,15,hoop_wacht_afwachten_hoogte_voldoende,0.7850014260764357
+166,melden_doorgeven_wilde_weten_bespreken,"[47, 54]",54,melden_doorgeven_wilde_weten_bespreken,47,besproken_vreemd_keuze_navragen_vraag,0.7805326539327355
+165,calprotectine_test_waarde_thuistest_app,"[11, 14]",11,calprotectine_waarde_waardes_crp_hoog,14,test_app_quanton_cal_calpro,0.7654827729438259
+164,slijm_ontlasting_bloed_soms_bloedverlies,"[12, 22, 51]",146,slijm_ontlasting_bloed_soms_zit,51,bloedverlies_bloed_helder_bloedingen_verlies,0.7613459351640958
+163,corona_vaccinatie_vaccin_covid_getest,"[37, 65]",37,vaccinatie_vaccin_vaccinaties_covid_vaccineren,65,corona_positief_getest_virus_covid,0.7600873709899412
+162,medicatie_medicijnen_medicijn_stoppen_gebruiken,"[10, 105]",105,voorgeschreven_geadviseerd_voorschrijven_gaf_geldt,10,medicatie_medicijnen_medicijn_stoppen_medicijngebruik,0.7556387332941693
+161,buikpijn_opgeblazen_gevoel_last_buik,"[41, 117]",117,opgeblazen_gevoel_nacht_buik_wakker,41,buikpijn_last_maagklachten_ontzettende_buik,0.7396278962871563
+160,voel_moe_energie_vermoeid_echt,"[38, 56]",56,moe_energie_vermoeid_voel_merk,38,voel_slecht_echt_voelde_lekker,0.7372130119989954
+159,pijn_buik_gewrichten_onderbuik_rug,"[23, 36, 42]",150,pijn_buik_onderbuik_rug_gevoel,42,gewrichten_handen_pijn_vingers_arm,0.7248629003184971
+158,afspraak_poli_bellen_telefonisch_contact,"[2, 3, 8]",151,afspraak_poli_telefonisch_bellen_gebeld,8,huisarts_arts_dokter_mdl_afspraak,0.7236581166419899
+157,tabletten_daags_omeprazol_esomeprazol_tablet,"[16, 58]",58,omeprazol_esomeprazol_daags_chew_calci,16,tabletten_dosis_tablet_dosering_daags,0.7227848163908048
+156,hiermee_mee_weet_hieraan_geregeld,"[24, 32]",24,geregeld_klopt_verstandig_probleem_bedoeling,32,hiermee_mee_weet_hieraan_ermee,0.721628245727223
+155,eten_eet_misselijk_eetlust_gegeten,"[45, 71]",71,misselijk_eetlust_overgeven_misselijkheid_eten,45,eten_eet_gegeten_voeding_drinken,0.7055276246363938
+154,darmen_darmonderzoek_darm_dikke_darmklachten,"[27, 48]",27,darmen_darm_darmklachten_dikke_last,48,darmonderzoek_darm_maagonderzoek_onderzoek_dikke,0.6996975360962235
+153,formulieren_ontvangen_formulier_brief_mail,"[6, 9]",6,brief_ontvangen_mail_post_bericht,9,formulieren_formulier_potje_lab_papieren,0.6994745434427535
+152,apotheek_recept_locatie_sturen_nieuw,"[5, 69]",5,apotheek_recept_locatie_sturen_nieuw,69,adres_locatie_mailadres_gewijzigd_emailadres,0.6792673988438886
+151,afspraak_poli_telefonisch_bellen_gebeld,"[2, 3]",3,afspraak_poli_gepland_staan_datum,2,telefonisch_bellen_gebeld_bereikbaar_contact,0.6486209728903641
+150,pijn_buik_onderbuik_rug_gevoel,"[23, 36]",23,buik_onderbuik_pijn_rug_bovenbuik,36,pijn_pijnlijk_erger_zenuwpijn_zitten,0.6467528019336837
+149,zetpillen_beclometason_pillen_beclomethason_beclametason,"[68, 120]",120,beclometason_zetpillen_beclomethason_beclametason_beclamethason,68,zetpillen_pillen_herhaal_gebruiken_herhaalrecept,0.6456998459738817
+148,bedankt_dank_reactie_alvast_snelle,"[0, 110]",110,oke_bedankt_komende_inhouden_vergissing,0,bedankt_dank_reactie_alvast_snelle,0.6454414917395193
+147,prikken_uitslag_bloed_ontlasting_uitslagen,"[1, 4]",1,prikken_ontlasting_bloed_ingeleverd_laten,4,uitslag_uitslagen_bekend_bloeduitslagen_spiegel,0.6186272945450388
+146,slijm_ontlasting_bloed_soms_zit,"[12, 22]",22,slijm_bloed_ontlasting_soms_zit,12,ontlasting_bloed_dunne_stoelgang_soms,0.5924053593547476
+145,gaat_beter_goed_slechter_ging,"[21, 40]",21,beter_gaat_slechter_ging_vanzelf,40,gaat_goed_blij_gelukkig_prima,0.5773836454766343
+144,ibd_periodieke_ibdcoach_vragenlijst_gezondheidscheck,"[44, 119]",119,ibd_verpleegkundige_digid_chili_mensen,44,ibd_periodieke_ibdcoach_gezondheidscheck_check,0.5161752086375561
+143,toilet_vaker_rennen_keer_buikpijn,"[18, 109]",18,toilet_vaker_rennen_keer_buikpijn,109,toilet_slijm_bloed_toiletbezoek_toiletpapier,0.486696506667323
