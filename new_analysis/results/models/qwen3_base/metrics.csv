@@ -1,0 +1,2 @@
+model_name,min_cluster_size,n_components,n_neighbors,diversity_score,c_v_score,document_coverage,number_of_topics
+qwen3,40,15,10,0.642809364548495,0.39504113567897525,0.626450059583161,150
