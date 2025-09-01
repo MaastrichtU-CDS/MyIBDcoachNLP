@@ -23,9 +23,9 @@ def get_hierarchical_topics(topic_model, docs):
 def main():
     # Define model configurations - FIXED TYPO IN QWEN3 PATH
     model_paths = {
-        'mpnet': 'new_analysis/results/models/mpnet_reduced_top_diversity',
-        'robbert': 'new_analysis/results/models/robbert_reduced_top_diversity', 
-        'qwen3': 'new_analysis/results/models/qwen3_reduced_top_diversity'  # Fixed: removed extra 'l' and leading dot
+        #'mpnet': 'new_analysis/results/models/mpnet_reduced_top_diversity',
+        'robbert': 'new_analysis/results/models/robbert_final' 
+        #'qwen3': 'new_analysis/results/models/qwen3_reduced_top_diversity'  # Fixed: removed extra 'l' and leading dot
     }
     
     # Load data once
@@ -52,13 +52,13 @@ def main():
             
             print(f"Loading model from {model_path}")
             topic_model = BERTopic.load(model_path, embedding_model=None)
-            print(f"Model (Reduced Outliers) {model_name} loaded successfully")
+            print(f"Model (Merged Topics) {model_name} loaded successfully")
 
             hierarchical_topics, fig = get_hierarchical_topics(topic_model, sentences)
             
-            fig.write_html(os.path.join(output_dir, f"hierarchy_{model_name}.html"))
-            hierarchical_topics.to_csv(os.path.join(model_paths[model_name], f"topic_hierarchy_{model_name}.csv"))
-            print(f"Results of {model_name} saved.")
+            fig.write_html(os.path.join(output_dir, f"hierarchy_{model_name}_final.html"))
+            #hierarchical_topics.to_csv(os.path.join(model_paths[model_name], f"topic_hierarchy_{model_name}.csv"))
+            print(f"Results of {model_name} final version saved.")
 
         except Exception as e:
             print(f"Error processing model {model_name}: {str(e)}")
