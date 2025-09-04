@@ -9,20 +9,44 @@ import datamapplot
 from umap import UMAP
 import numpy as np
 
+import os
+import datamapplot
+import numpy as np
+import pandas as pd
+import datamapplot
 
-def visualize_documents(topic_model, docs, reduced_embeddings, output_dir, fig_name, model_name="robbert", labels=None):
-    # Get the 20 most frequent topics (excluding -1)
-    freq = topic_model.get_topic_freq()
-    top_topics = freq.loc[freq.Topic != -1, "Topic"].head(15).tolist()
-    selected_topics = top_topics
+def visualize_docs(topic_model, docs, reduced_embeddings):
+    fig =  topic_model.visualize_documents(docs, reduced_embeddings=reduced_embeddings)
+
+    return fig
+
+
+def visualize_datamap(
+    topic_model,
+    docs,
+    reduced_embeddings,
+    output_dir,
+    fig_name="docs_datamap_selected_topics_labels.png",
+    selected_topics = None,
+    model_name="robbert",
+    labels=None
+):
+    # Get the 30 most frequent topics (excluding -1)
+    #freq = topic_model.get_topic_freq()
+    #top_topics = freq.loc[freq.Topic != -1, "Topic"].head(30).tolist()
+
+    # Use BERTopic's built-in datamap
     fig = topic_model.visualize_document_datamap(
         docs,
         topics=selected_topics,
         topic_prefix=True,
+        custom_labels=labels,
         reduced_embeddings=reduced_embeddings,
-        title="Document Map with Top 15 Topics"
+        title="Document Map with Labels"
     )
 
+
+    # Save figure
     fig.savefig(os.path.join(output_dir, fig_name), bbox_inches="tight", dpi=300)
     return None
 
@@ -42,22 +66,21 @@ def reduce_embeddings(embeddings_path, model_name):
         reduced_embeddings = joblib.load(reduced_embed_path)
     else:
         print("Computing embeddings and UMAP reduction...")
-        reduce_embeddings(reduced_embed_path, embeddings)
 
-    reducer = UMAP(
-        n_neighbors=10,
-        n_components=2,
-        min_dist=0.0,
-        metric="cosine",
-        random_state=42
-    )
-    reduced_embeddings = reducer.fit_transform(embeddings)
+        reducer = UMAP(
+            n_neighbors=10,
+            n_components=2,
+            min_dist=0.0,
+            metric="cosine",
+            random_state=42
+        )
+        reduced_embeddings = reducer.fit_transform(embeddings)
 
-    # Save for later reuse
-    joblib.dump(reduced_embeddings, reduced_embed_path)
-    print(f"Saved reduced embeddings to {reduced_embed_path}")
+        # Save for later reuse
+        joblib.dump(reduced_embeddings, reduced_embed_path)
+        print(f"Saved reduced embeddings to {reduced_embed_path}")
 
-    return None
+    return reduced_embeddings
 
 def main():
     # Define model configurations
@@ -83,13 +106,6 @@ def main():
         # get embeddings path
         embeddings_path = f"./data/embeddings_{model_name}.npy"
 
-        if model_name == "mpnet":
-            embedding_model = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
-        elif model_name == "robbert":
-            embedding_model = "NetherlandsForensicInstitute/robbert-2022-dutch-sentence-transformers" 
-        else:  # qwen3
-            embedding_model = "Qwen/qwen3-embedding-8b"  
-        
         try:
             # load model
             print(f"Loading model from {model_path}")
@@ -99,15 +115,39 @@ def main():
             # get reduced embeddings
             reduced_embeddings = reduce_embeddings(embeddings_path, model_name)
 
-            # visualize documents for the model before merging
-            visualize_documents(
+            # import labels for the selected topics if any
+            with open("./labels_selected_topics.txt", "r", encoding="utf-8") as f:
+                lines = f.readlines()
+
+            # strip newline characters (\n)
+            labels = [line.strip() for line in lines]
+
+            # Map selected topic IDs to labels
+            custom_labels = dict(zip(
+                [0, 1, 2, 3, 4, 5, 7, 12, 16, 21, 26, 29, 33, 48, 54, 79, 119],
+                labels
+            ))
+
+            print(custom_labels)
+
+            # visualize documents for the model
+            visualize_datamap(
                 topic_model,
                 sentences,
                 reduced_embeddings,
                 output_dir,
-                fig_name=f"doc_map_{model_name}_merged.png"
+                selected_topics=[0, 1, 2, 3, 4, 5, 7, 12, 16, 21, 26, 29, 33, 48, 54, 79, 119],
+                labels = custom_labels
             )
+
             print(f"Document map for {model_name} saved.")
+
+            #fig = visualize_docs(
+                #topic_model,
+                #sentences,
+                #reduced_embeddings
+            #)
+            #fig.write_html(os.path.join(output_dir, f"visualized_docs_{model_name}.html"))
 
         except Exception as e:
             print(f"❌ Error processing {model_name}: {e}")

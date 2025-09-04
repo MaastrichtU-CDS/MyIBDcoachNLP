@@ -37,6 +37,7 @@ def automatic_merge_topics(topics_to_merge, topic_model, docs, output_dir):
     doc_info_path = os.path.join(output_dir, "doc_info_final.csv")
     # Save topic and document info
     topic_info.to_csv(topic_info_path, index=False)
+    #topic_info.to_excel(topic_info_path, index=False)
     document_info.to_csv(doc_info_path, index=False)
 
     return topic_model
@@ -45,7 +46,7 @@ def main():
     # Define model configurations
     model_paths = {
         #'mpnet': 'new_analysis/results/models/mpnet_reduced_top_diversity',
-        'robbert': 'new_analysis/results/models/robbert_reduced_outlier',
+        'robbert': 'new_analysis/results/models/robbert_reduced',
         #'qwen3': 'new_analysis/results/models/qwen3_reduced_top_diversity'
     }
     

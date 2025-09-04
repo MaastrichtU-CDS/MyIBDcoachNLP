@@ -1,2 +1,0 @@
-model_name,min_cluster_size,n_components,n_neighbors,diversity_score,c_v_score,document_coverage,number_of_topics
-mpnet,25,7,10,0.6695957820738138,0.3618807876552732,0.6760378413871933,230

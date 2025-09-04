@@ -1,0 +1,2 @@
+model_name,min_cluster_size,n_components,n_neighbors,diversity_score,c_v_score,document_coverage,number_of_topics
+robbert,25,10,10,0.690456081081081,0.3672071757184299,0.734477978550062,240
