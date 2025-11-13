@@ -24,3 +24,7 @@ models_other_use/*
 *.slurm
 *.sbatch
 /home/jzhang/mijnidbcoachnlp/new_analysis/results/models/models_other_use/
+.vscode/
+chunks/
+notebooks/other/
+scripts/other/

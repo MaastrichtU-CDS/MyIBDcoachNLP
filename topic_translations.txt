@@ -1,0 +1,120 @@
+Topic 0: thanks, thank you, response, in advance
+Topic 2: telephone, calling, called, contact
+Topic 5: appointment, outpatient clinic, scheduled, set
+Topic 7: pharmacy, prescription, location, send
+Topic 8: letter, received, mail, post
+Topic 11: forms, form, sample jar, lab
+Topic 14: with, with this, know, about this
+Topic 15: test, app, Quanton, cal
+Topic 18: hope, wait, awaiting, height
+Topic 28: long, months, year, waiting
+Topic 37: holiday, departure, Netherlands, travel
+Topic 41: work, working, employer, home
+Topic 47: report, pass on, wanted, know
+Topic 57: address, location, email address, changed
+Topic 59: checkup, appointment, controls, control strip
+Topic 64: insurance, health insurance, risk, application
+Topic 68: questionnaire, filled in, fill out, questionnaires
+Topic 69: session, log in, sessions, notification
+Topic 75: apologies, sorry, late, many
+Topic 81: heard, learned, present, about this
+Topic 84: went, wrong, error, went wrong
+Topic 86: opinion, think, agree, about this
+Topic 90: photo, file, image, large
+Topic 92: okay, thanks, upcoming, include
+Topic 93: help, mean, hope, with this
+Topic 97: IBD, nurse, DigiD, Chili
+Topic 100: check, please, extend, adjust
+Topic 102: referral, referral letter, referral, refer
+Topic 1: pricking, stool, blood, handed in
+Topic 3: pain, abdomen, abdominal pain, discomfort
+Topic 4: mucus, toilet, stool, blood
+Topic 6: result, results, known, blood results
+Topic 9: Humira, syringe, injecting, injection
+Topic 10: general practitioner, doctor, physician, gastroenterologist
+Topic 12: medication, medicines, drug, stopping
+Topic 13: calprotectin, value, values, CRP
+Topic 16: infusion, infliximab, vedolizumab, Remicade
+Topic 17: goes, better, good, worse
+Topic 19: fever, coughing, throat, sore throat
+Topic 20: tablets, dose, tablet, dosage
+Topic 21: eating, eat, nauseous, appetite
+Topic 22: Crohn’s, colitis, disease, ulcerative
+Topic 23: hospital, admitted, location, visit
+Topic 24: complaints, worsened, worse, reduced
+Topic 25: prednisone, prednisolone, tapered, tapering schedule
+Topic 26: endoscopy, colonoscopy, colonscopy, gastroscopy
+Topic 27: intestines, bowel, bowel complaints, colon
+Topic 29: operation, surgeon, operated, surgery
+Topic 30: happened, unfortunately, solve, succeeded
+Topic 31: skin, face, itch, red
+Topic 32: question, questions, little question, queries
+Topic 33: pregnant, gynecologist, pregnancy, delivery
+Topic 34: advice, advise, gladly, tips
+Topic 35: vaccination, vaccine, vaccinations, COVID
+Topic 36: feel, bad, really, felt
+Topic 38: Purinethol, puri, nethol, new
+Topic 39: IBD, periodic, IBD coach, health check
+Topic 40: vitamin, folic acid, vitamins, multivitamin
+Topic 42: discussed, strange, question, choice
+Topic 43: bowel examination, intestine, stomach examination, investigation
+Topic 44: Pentasa, granules, suppositories, pellets
+Topic 45: antibiotics, course, antibiotic treatment, bacteria
+Topic 46: diarrhea, stomach flu, abdominal pain, vomiting
+Topic 48: MRI, scan, result, made
+Topic 49: tired, energy, fatigued, feel
+Topic 50: screening, population screening, bowel cancer, examinations
+Topic 51: omeprazole, esomeprazole, daily, chew
+Topic 52: enema, enemas, foam enema, used
+Topic 53: paracetamol, tramadol, amitriptyline, helps
+Topic 54: iron, iron infusion, iron level, iron deficiency
+Topic 55: corona, positive, tested, virus
+Topic 56: suppositories, pills, repeat, use
+Topic 58: urine, bladder infection, bladder, kidney
+Topic 60: anus, fistula, abscess, pain
+Topic 61: possible, possibilities, hear, gladly
+Topic 62: Thiosix, repeat prescription, new, prescription
+Topic 63: kilo, weight, lost weight, weigh
+Topic 65: dermatologist, dermatology, referral, reference
+Topic 66: ointment, cream, applying, applied
+Topic 67: Cortiment, tapering, stopping, swallow
+Topic 70: worries, afraid, anxious, beginning
+Topic 71: headache, dizzy, dizziness, head
+Topic 72: inflammation, inflammations, active, healing
+Topic 73: eyes, ophthalmologist, eye, wisdom
+Topic 74: try, tried, succeed, consciously
+Topic 76: psyllium fibers, Metamucil, sugar-free, Teva
+Topic 77: scopy, scheduled, sedation, planned
+Topic 78: side effects, ciclosporin, effect, very
+Topic 79: dentist, mouth, tongue, gums
+Topic 80: fatigue, fatigue complaints, trouble, present
+Topic 82: rheumatologist, rheumatology, arthrosis, referral
+Topic 83: ustekinumab, ustekinimab, the, and
+Topic 85: azathioprine, daily, tablet, Klinion
+Topic 87: stress, role, period, work
+Topic 88: stoma, stoma nurse, removed, operation
+Topic 89: prescribed, advised, prescribing, gave
+Topic 91: sports, exercise, condition, walking
+Topic 94: drinking, liter, drink, water
+Topic 95: flu shot, flu injection, chickenpox, flu
+Topic 96: stomach protector, stomach protectors, calcium tablets, new
+Topic 98: beclometasone, suppositories, beclomethasone, beclametason
+Topic 99: Mezavant, Mesavant, mesalazine, calcium
+Topic 101: liver, liver values, liver tests, hepatologist
+Topic 103: lungs, pulmonologist, chest X-ray, pneumonia
+Topic 104: ultrasound, little heart, see, beating
+Topic 105: participate, join, cooperate, with this
+Topic 106: flare-up, brewing, fear, feels
+Topic 107: fibers, sachets, better, drinking
+Topic 108: Picoprep, Moviprep, preparation, collected
+Topic 109: risk group, risk, fall, belong
+Topic 110: Stelara, Sterlara, injection, Stellara
+Topic 111: Budenofalk, budesonide, stopping, leaflet
+Topic 112: infusion center, infusion, infusions, said
+Topic 113: Salofalk, stix, granules, mesalazine
+Topic 114: Questran, Cholestagel, new, prescription
+Topic 115: hemorrhoids, hemorrhoid, internal, vagina
+Topic 116: psychologist, psychiatry, social work, learning
+Topic 117: diarrhea, watery, azithromycin, watery
+Topic 118: Entocort, tapering, capsules, started
+Topic 119: hair loss, hair, bald, scalp
