@@ -148,6 +148,13 @@ def plot_per_model(df, model_name, outdir):
 # =============================================
 
 def plot_average_trends(df, outdir):
+    """
+    For each parameter:
+        - Row of 3 subplots (one per metric)
+        - Solid model-color line = mean normalized metric value
+        - Dashed model-color line on twin y-axis = mean #topics
+    """
+
     for parameter in PARAMETERS:
         fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(20, 5))
         axes = axes.flatten()
@@ -155,43 +162,104 @@ def plot_average_trends(df, outdir):
         for model_name in df["model_name"].unique():
             df_model = df[df["model_name"] == model_name].copy()
 
+            # Normalize metrics for fair comparison
             scaler = MinMaxScaler()
             df_model[METRICS] = scaler.fit_transform(df_model[METRICS])
 
-            in_range = df_model["in_range"]
-
             color = MODEL_COLORS.get(model_name, "black")
+
+            # Precompute topic trend (not normalized!)
+            mean_topics = (
+                df_model.groupby(parameter)["number_of_topics"]
+                .mean()
+                .sort_index()
+            )
 
             for i, metric in enumerate(METRICS):
                 ax = axes[i]
 
-                # Mean (all)
-                mean_all = df_model.groupby(parameter)[metric].mean().sort_index()
-                ax.plot(
-                    mean_all.index, mean_all.values,
-                    marker="o", linestyle="--", alpha=0.4, color=color,
-                    label=f"{model_name} (all)" if i == 0 else None,
+                # -------------------------------
+                # Metric trend (solid line)
+                # -------------------------------
+                mean_metric = (
+                    df_model.groupby(parameter)[metric]
+                    .mean()
+                    .sort_index()
                 )
 
-                # Mean (in-range)
-                mean_in = df_model[in_range].groupby(parameter)[metric].mean().sort_index()
                 ax.plot(
-                    mean_in.index, mean_in.values,
-                    marker="o", linestyle="-", alpha=1.0, color=color,
-                    label=f"{model_name} (in-range)" if i == 0 else None,
+                    mean_metric.index,
+                    mean_metric.values,
+                    marker="o",
+                    linestyle="-",
+                    linewidth=2,
+                    alpha=0.9,
+                    color=color,
+                    label=f"{model_name} metric" if i == 0 else None,
                 )
 
-        # Formatting
+                # -------------------------------
+                # Topic count trend (twin axis)
+                # -------------------------------
+                ax2 = ax.twinx()
+                ax2.plot(
+                    mean_topics.index,
+                    mean_topics.values,
+                    linestyle="--",
+                    linewidth=2,
+                    alpha=0.8,
+                    color=color,
+                    label=f"{model_name} #topics" if i == 0 else None,
+                )
+
+                # Right axis label only once per subplot
+                if i == 2:  # right-most panel
+                    ax2.set_ylabel("Mean # Topics", color="grey")
+                    ax2.tick_params(axis='y', labelcolor='grey')
+
+        # ---------------------------------------
+        # Formatting per subplot
+        # ---------------------------------------
         for ax, metric in zip(axes, METRICS):
-            ax.set_title(DISPLAY_NAMES[metric])
-            ax.set_ylabel("Normalized Score")
+            ax.set_title(
+                f"Normalized {DISPLAY_NAMES[metric]} vs {DISPLAY_NAMES[parameter]}"
+            )
             ax.set_xlabel(DISPLAY_NAMES[parameter])
+            ax.set_ylabel(f"Normalized {DISPLAY_NAMES[metric]}")
             ax.set_ylim(0, 1)
             ax.grid(True)
             ax.set_xticks(sorted(df[parameter].unique()))
-            ax.legend()
 
-        fig.suptitle(f"Mean Trends Across Models — Parameter: {DISPLAY_NAMES[parameter]}", fontsize=16)
+        # ---------------------------------------
+        # Combined legends (metric + topic lines)
+        # ---------------------------------------
+        # Build a combined legend using both axes
+        handles_main = []
+        labels_main = []
+        for ax in axes:
+            h, l = ax.get_legend_handles_labels()
+            handles_main.extend(h)
+            labels_main.extend(l)
+
+            # also fetch legend handles from twin axes
+            h2, l2 = ax.twinx().get_legend_handles_labels()
+            handles_main.extend(h2)
+            labels_main.extend(l2)
+
+        # Remove duplicates
+        combined = dict(zip(labels_main, handles_main))
+        fig.legend(
+            combined.values(),
+            combined.keys(),
+            loc="upper center",
+            ncol=3,
+            bbox_to_anchor=(0.5, 1.12),
+        )
+
+        fig.suptitle(
+            f"Mean Trends Across Models — Parameter: {DISPLAY_NAMES[parameter]}",
+            fontsize=18,
+        )
         plt.tight_layout(rect=[0, 0, 1, 0.95])
 
         outpath = os.path.join(outdir, f"average_trends_{parameter}.png")

@@ -4,6 +4,7 @@ import re
 import glob
 import argparse
 import pandas as pd
+from sklearn import base
 
 
 def extract_model_name(filename):
@@ -18,15 +19,28 @@ def extract_model_name(filename):
     return None
 
 
+def extract_run_id(filepath):
+    """
+    Extracts run_id from path: results/checkpoints/<run_id>/file.csv
+    """
+    parts = filepath.split(os.sep)
+    # Expect: .../results/checkpoints/run_XXX/filename.csv
+    for i, p in enumerate(parts):
+        if p == "checkpoints" and i + 1 < len(parts):
+            return parts[i + 1]
+    return "unknown_run"
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Combine BERTopic grid-search checkpoint CSV files.")
+        description="Combine BERTopic grid-search checkpoint CSV files across runs."
+    )
 
     parser.add_argument(
         "--checkpoints-dir",
         type=str,
         default="results/checkpoints",
-        help="Directory containing *_results_chunk_*.csv files."
+        help="Directory containing run_* folders with checkpoint CSV files."
     )
 
     parser.add_argument(
@@ -45,25 +59,32 @@ def main():
     checkpoints_dir = args.checkpoints_dir
     output_file = args.output_file
 
-    pattern = os.path.join(checkpoints_dir, "*_results_chunk_*.csv")
-    csv_files = sorted(glob.glob(pattern))
+    # NEW: recursive search
+    pattern = os.path.join(checkpoints_dir, "**", "*_results_chunk_*.csv")
+    csv_files = sorted(glob.glob(pattern, recursive=True))
 
     if not csv_files:
         print(f"No CSV files found matching pattern: {pattern}")
         return
 
-    print(f"Found {len(csv_files)} CSV files. Concatenating...")
+    print(f"Found {len(csv_files)} checkpoint CSVs across runs.")
 
     dfs = []
     for f in csv_files:
         model_name = extract_model_name(f)
+        run_id = extract_run_id(f)
+
         if not model_name:
             print(f"Could not extract model name from '{f}' — skipping.")
             continue
 
         try:
             df = pd.read_csv(f)
+            # Normalize column names
+            if "doc_assignment_pct" not in df.columns and "document_coverage" in df.columns:
+                df = df.rename(columns={"document_coverage": "doc_assignment_pct"})
             df["model_name"] = model_name
+            df["run_id"] = run_id
             dfs.append(df)
         except Exception as e:
             print(f"Error reading {f}: {e}")

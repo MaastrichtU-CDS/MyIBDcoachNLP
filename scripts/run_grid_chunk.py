@@ -27,6 +27,9 @@ def parse_args():
     parser.add_argument("--chunk-id", type=int, required=True,
                         help="Chunk ID (integer).")
 
+    parser.add_argument("--chunk-dir", type=str, default="chunks/new_chunks",
+                    help="Directory containing chunk files")
+
     parser.add_argument("--input-data", type=str,
                         help="Excel file containing sentences.",
                         default="data/cleaned_patient_deduplicated_sentences_for_embedding.xlsx")
@@ -47,7 +50,9 @@ def parse_args():
 
     parser.add_argument("--output-dir", type=str,
                         help="Base output directory for checkpoints.",
-                        default="results/bertopic_grid_search/")
+                        default="results/checkpoints/")
+
+    parser.add_argument("--run-id", type=str, required=True)
 
     return parser.parse_args()
 
@@ -105,21 +110,28 @@ def main():
     # --------------------------------------------------------
     os.makedirs(args.output_dir, exist_ok=True)
 
+    run_dir = os.path.join(args.output_dir, args.run_id)
+    os.makedirs(run_dir, exist_ok=True)
+
     checkpoint_file = os.path.join(
-        args.output_dir,
+        run_dir,
         f"{model_name}_results_chunk_{chunk_id}.csv"
     )
 
     # --------------------------------------------------------
     # Load chunk parameters
     # --------------------------------------------------------
-    chunk_file = f"chunks/chunk_{args.chunk_id}.json"
+    chunk_file = os.path.join(args.chunk_dir, f"chunk_{args.chunk_id}.json")
 
     if not os.path.exists(chunk_file):
         raise FileNotFoundError(f"Chunk file not found: {chunk_file}")
 
     with open(chunk_file, "r") as f:
         chunk_combinations = json.load(f)
+
+    if len(chunk_combinations) == 0:
+        print(f"Warning: Chunk {chunk_id} is empty. Nothing to do.")
+        return
 
     # --------------------------------------------------------
     # Load base data

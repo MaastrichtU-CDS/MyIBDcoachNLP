@@ -4,7 +4,7 @@ venv/
 .venv/
 myenv/
 my_env/
-env-link-3.10/
+env*
 myenv-link/
 venv-gpu/
 saved_models/
@@ -30,3 +30,4 @@ notebooks/other/
 scripts/other/
 legacy/
 embeddings/
+*.sh
