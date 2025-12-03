@@ -59,7 +59,7 @@ def parse_args():
 # ============================================================
 # Metric helpers
 # ============================================================
-def get_top_words(topic_model, top_n):
+def get_top_words(topic_model, top_n=10):
     topics = topic_model.get_topics()
     top_words = []
     for topic_num, word_score_list in topics.items():

@@ -6,6 +6,7 @@ import argparse
 import numpy as np
 import pandas as pd
 import pickle
+import random
 
 from bertopic import BERTopic
 from sklearn.feature_extraction.text import CountVectorizer
@@ -13,77 +14,116 @@ from hdbscan import HDBSCAN
 from umap import UMAP
 from gensim.corpora import Dictionary
 from gensim.models.coherencemodel import CoherenceModel
+
 from run_grid_chunk import get_topic_diversity
 from run_grid_chunk import get_top_words
 from run_grid_chunk import get_coverage
 from run_grid_chunk import get_nr_topics
+
+# Set random seed for reproducibility
+random.seed(42)
+np.random.seed(42)
 
 
 # ========================================================
 # Argparse
 # ========================================================
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description="Run BERTopic with best parameters selected from grid search."
-    )
+    parser = argparse.ArgumentParser(description="Run BERTopic with best config and outlier reduction.")
 
     parser.add_argument(
         "--model-name",
         type=str,
         required=True,
-        help="Model name to run (e.g. mpnet, robbert, qwen3)"
-    )
-
-    parser.add_argument(
-        "--best-configs-file",
-        type=str,
-        required=True,
-        help="CSV file containing filtered best configs (e.g. top_model_configs.csv)"
+        help="Model name (e.g. mpnet, robbert, qwen3)."
     )
 
     parser.add_argument(
         "--input-data",
         type=str,
-        default="./data/cleaned_patient_deduplicated_sentences_for_embedding.xlsx",
-        help="Path to Excel file containing sentences"
+        default="data/cleaned_patient_deduplicated_sentences_for_embedding.xlsx",
+        help="Excel file containing sentences."
     )
 
     parser.add_argument(
         "--text-column",
         type=str,
         default="sentence",
-        help="Name of column containing text data"
+        help="Column name containing text data."
     )
 
     parser.add_argument(
-        "--tokenized-texts",
+        "--input-embeddings",
         type=str,
-        default="/home/jzhang/mijnidbcoachnlp/data/tokens/tokenized_sentences.pkl",
-        help="Pickle file with tokenized texts for coherence evaluation"
+        required=True,
+        help="NumPy .npy file containing text embeddings."
     )
 
     parser.add_argument(
-        "--stopwords-file",
+        "--input-tokens",
         type=str,
-        default="./data/stopwords-nl-extended.txt",
-        help="Stopword file (one per line)"
+        default="data/tokens/tokenized_sentences.pkl",
+        help="Pickle file containing tokenized texts."
     )
 
     parser.add_argument(
-        "--embeddings-dir",
+        "--input-stopwords",
         type=str,
-        default="./data",
-        help="Directory containing embeddings_{model_name}.npy"
+        default="data/stopwords-nl-extended.txt",
+        help="Text file containing Dutch stopwords, one per line."
+    )
+
+    parser.add_argument(
+        "--best-configs-file",
+        type=str,
+        required=True,
+        help="CSV file containing best parameter configurations per model."
     )
 
     parser.add_argument(
         "--output-dir",
         type=str,
-        required=True,
-        help="Directory to save the BERTopic model and outputs"
+        default="results/",
+        help="Base output directory for checkpoints."
+    )
+    return parser.parse_args()
+
+
+# ========================================================
+# Outlier reduction helper
+# ========================================================
+def reduce_outlier_for_model(topic_model, docs, embeddings, stopwords):
+    """Reduce outliers for a BERTopic model using embeddings strategy."""
+    topics = topic_model.topics_
+
+    print(f"Original outliers: {sum(1 for t in topics if t == -1)}")
+
+    new_topics = topic_model.reduce_outliers(
+        documents=docs,
+        topics=topics,
+        strategy="embeddings",
+        embeddings=embeddings
     )
 
-    return parser.parse_args()
+    print(f"Remaining outliers after reduction: {sum(1 for t in new_topics if t == -1)}")
+
+    # Rebuild vectorizer (same spec as initial one, but with given stopwords)
+    vectorizer_model = CountVectorizer(
+        stop_words=stopwords,
+        min_df=2,
+        ngram_range=(1, 1),
+        token_pattern=r'\b[a-zA-Z]{3,}\b'
+    )
+
+    # Update topics in the model
+    topic_model.update_topics(
+        docs,
+        topics=new_topics,
+        vectorizer_model=vectorizer_model
+    )
+
+    return topic_model
+
 
 # ========================================================
 # MAIN
@@ -99,9 +139,7 @@ def main():
     best_df = pd.read_csv(args.best_configs_file)
 
     if model_name not in best_df["model_name"].unique():
-        raise ValueError(
-            f"Model '{model_name}' not found in best configs file."
-        )
+        raise ValueError(f"Model '{model_name}' not found in best configs file.")
 
     best_row = (
         best_df[best_df["model_name"] == model_name]
@@ -109,7 +147,6 @@ def main():
         .iloc[0]
     )
 
-    # Extract parameters
     min_cluster_size = int(best_row["min_cluster_size"])
     n_components = int(best_row["n_components"])
     n_neighbors = int(best_row["n_neighbors"])
@@ -123,25 +160,23 @@ def main():
     # ----------------------------------------------------
     # Load data
     # ----------------------------------------------------
+    print("\nLoading data...")
     df = pd.read_excel(args.input_data)
     sentences = df[args.text_column].astype(str).tolist()
 
-    with open(args.tokenized_texts, "rb") as f:
+    with open(args.input_tokens, "rb") as f:
         tokenized_texts = pickle.load(f)
     dictionary = Dictionary(tokenized_texts)
 
-    embeddings_path = os.path.join(
-        args.embeddings_dir,
-        f"embeddings_{model_name}.npy"
-    )
-    embeddings = np.load(embeddings_path)
+    embeddings = np.load(args.input_embeddings)
 
-    with open(args.stopwords_file, "r") as f:
-        stopwords = [line.strip() for line in f]
+    with open(args.input_stopwords, "r") as f:
+        stopwords = [line.strip() for line in f if line.strip()]
 
     # ----------------------------------------------------
     # Build BERTopic with selected params
     # ----------------------------------------------------
+    print("\nBuilding BERTopic model...")
     vectorizer = CountVectorizer(
         stop_words=stopwords,
         min_df=2,
@@ -176,16 +211,25 @@ def main():
     print("\nFitting BERTopic model...")
     topics, _ = model.fit_transform(sentences, embeddings)
 
+        # Extract UMAP reduced embeddings
+    umap_embeddings = model.umap_model.embedding_
+
+    # Save them for later use
+    np.save(
+        f"embeddings/{model_name}_umap_embeddings.npy",
+        umap_embeddings
+    )
+    print(f"Saved UMAP embeddings to embeddings/{model_name}_umap_embeddings.npy")
+
     # ----------------------------------------------------
-    # Evaluate metrics (print only)
+    # Evaluate metrics (before outlier reassignment)
     # ----------------------------------------------------
-    print("\n=== Evaluating metrics ===")
+    print("\n=== Evaluating metrics (before outlier reassignment) ===")
     top_words = get_top_words(model)
     coverage = get_coverage(model)
     nr_topics = get_nr_topics(model)
     diversity = get_topic_diversity(top_words)
 
-    # Compute C_V coherence
     cm = CoherenceModel(
         topics=top_words,
         texts=tokenized_texts,
@@ -194,25 +238,74 @@ def main():
     )
     c_v = cm.get_coherence()
 
-    print(f"Document coverage:  {coverage:.4f}")
+    print(f"Document assignment%:  {coverage:.4f}")
     print(f"Number of topics:   {nr_topics}")
     print(f"Diversity score:    {diversity:.4f}")
     print(f"C_V coherence:      {c_v:.4f}")
+
+    # ----------------------------------------------------
+    # Apply outlier reassignment
+    # ----------------------------------------------------
+    print("\nApplying automatic outlier reassignment...")
+    model_reduced = reduce_outlier_for_model(
+        topic_model=model,
+        docs=sentences,
+        embeddings=embeddings,
+        stopwords=stopwords
+    )
+
+    # ----------------------------------------------------
+    # Evaluate metrics (after outlier reassignment)
+    # ----------------------------------------------------
+    print("\n=== Evaluating metrics (after outlier reassignment) ===")
+    top_words_new = get_top_words(model_reduced)
+    coverage_new = get_coverage(model_reduced)
+    nr_topics_new = get_nr_topics(model_reduced)
+    diversity_new = get_topic_diversity(top_words_new)
+
+    cm_new = CoherenceModel(
+        topics=top_words_new,
+        texts=tokenized_texts,
+        dictionary=dictionary,
+        coherence="c_v"
+    )
+    c_v_new = cm_new.get_coherence()
+
+    print(f"Document assignment %:  {coverage_new:.4f}")
+    print(f"Number of topics:   {nr_topics_new}")
+    print(f"Diversity score:    {diversity_new:.4f}")
+    print(f"C_V coherence:      {c_v_new:.4f}")
 
     # ----------------------------------------------------
     # Save model + outputs
     # ----------------------------------------------------
     os.makedirs(args.output_dir, exist_ok=True)
 
-    print("\nSaving BERTopic model...")
-    model.save(args.output_dir, serialization="pytorch", save_ctfidf=True)
+    base_model_name = f"{model_name}"
 
-    print("\nSaving topic info and documents...")
+    model_path = os.path.join(args.output_dir, f"{base_model_name}_model")
+    reduced_model_path = os.path.join(args.output_dir, f"{base_model_name}_model_reduced")
+
+    print("\nSaving BERTopic models...")
+    model.save(model_path, serialization="pytorch", save_ctfidf=True)
+    model_reduced.save(reduced_model_path, serialization="pytorch", save_ctfidf=True)
+
+    print("Saving topic info and document info...")
     model.get_topic_info().to_csv(
-        os.path.join(args.output_dir, "topic_info.csv"), index=False
+        os.path.join(args.output_dir, f"{base_model_name}_topic_info.csv"),
+        index=False
+    )
+    model_reduced.get_topic_info().to_csv(
+        os.path.join(args.output_dir, f"{base_model_name}_topic_info_reduced.csv"),
+        index=False
     )
     model.get_document_info(docs=sentences).to_csv(
-        os.path.join(args.output_dir, "document_info.csv"), index=False
+        os.path.join(args.output_dir, f"{base_model_name}_document_info.csv"),
+        index=False
+    )
+    model_reduced.get_document_info(docs=sentences).to_csv(
+        os.path.join(args.output_dir, f"{base_model_name}_document_info_reduced.csv"),
+        index=False
     )
 
     print("\n=== Done ===")

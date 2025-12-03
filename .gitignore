@@ -31,3 +31,4 @@ scripts/other/
 legacy/
 embeddings/
 *.sh
+*document_info*

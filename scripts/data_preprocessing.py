@@ -269,17 +269,22 @@ def main():
 
     # 3. Split the cleaned messages into sentences and prepare for analysis
     sentence_df = create_sentence_data(cleaned_messages_df)
+    sentence_df["is_duplicate"] = sentence_df.duplicated(subset=["sentence"], keep="first")
     # save the sentence dataframe to a new file
     sentence_output_path = args.output_path.replace("_messages.xlsx", "_sentences.xlsx")
     sentence_df.to_excel(sentence_output_path, index=False)
     print("✅ Sentences extracted and saved to", sentence_output_path)
 
-    # 4. Drop duplicated sentences in the sentence dataframe and save
-    dedup_sentence_df = sentence_df.drop_duplicates(subset=['sentence'], keep='first')
-    print("Number of sentences after dropping duplicates:", len(dedup_sentence_df))
-    dedup_sentence_output_path = args.output_path.replace("_messages.xlsx", "_deduplicated_sentences_for_embedding.xlsx")
-    dedup_sentence_df.to_excel(dedup_sentence_output_path, index=False)
-    print("✅ Duplicated sentences dropped and saved to", dedup_sentence_output_path)
+    print("Number of duplicated sentences found:", sentence_df['is_duplicate'].sum())
+    print("Number of sentences after dropping duplicates:", len(sentence_df[sentence_df['is_duplicate'] == False]))
+    num_messages_analysis = sentence_df['message_id'].nunique()
+    print("Number of unique messages contributing to sentences for analysis:", num_messages_analysis)
+
+    # 4. Alternative: Drop duplicate sentences and save to a new file
+    #dedup_sentence_df = sentence_df[sentence_df['is_duplicate'] == False].reset_index(drop=True)
+    #dedup_sentence_output_path = args.output_path.replace("_messages.xlsx", "_dedupliated_sentences_for_embedding.xlsx")
+    #dedup_sentence_df.to_excel(dedup_sentence_output_path, index=False)
+    #print("✅ Deduplicated sentences saved to", dedup_sentence_output_path)
 
 if __name__ == "__main__":
     main()

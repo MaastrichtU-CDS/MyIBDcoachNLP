@@ -79,9 +79,11 @@ def plot_per_model(df, model_name, outdir):
 
     for r, parameter in enumerate(PARAMETERS):
         group_params = [p for p in PARAMETERS if p != parameter]
+        
 
         for c, metric in enumerate(METRICS):
             ax = axes[r][c]
+            
 
 
             # Scatter points
@@ -121,6 +123,8 @@ def plot_per_model(df, model_name, outdir):
             ax2.set_ylabel("Mean # Topics", color="black")
             ax2.tick_params(axis='y', labelcolor='black')
 
+            if parameter == "n_components":
+                ax.set_xticks([5, 7, 10, 12, 15])
 
             # Labels
             ax.set_title(f"{DISPLAY_NAMES[metric]} vs {DISPLAY_NAMES[parameter]}")
@@ -147,125 +151,307 @@ def plot_per_model(df, model_name, outdir):
 # Average trends plot (1×3 per parameter)
 # =============================================
 
-def plot_average_trends(df, outdir):
+def plot_average_trends_all(df, outdir):
     """
-    For each parameter:
-        - Row of 3 subplots (one per metric)
-        - Solid model-color line = mean normalized metric value
-        - Dashed model-color line on twin y-axis = mean #topics
+    For each parameter (min_cluster_size, n_components, n_neighbors):
+        Create a row of 4 subplots:
+            1. C_v Coherence (raw)
+            2. Topic Diversity (raw)
+            3. Document Assignment % (raw)
+            4. Number of Topics (raw)
+
+        Each line = one model, summarized by group means for that parameter.
+        Y-limits are consistent across ALL models and parameters (global),
+        with padding added to improve visibility.
     """
 
+    # -----------------------------------------
+    # Metric definitions
+    # -----------------------------------------
+    metrics = ["c_v_score", "diversity_score", "doc_assignment_pct"]
+    metric_display = {
+        "c_v_score": "C_v Coherence",
+        "diversity_score": "Topic Diversity",
+        "doc_assignment_pct": "Document Assignment %"
+    }
+    topic_display = "Number of Topics"
+
+    # -----------------------------------------
+    # Compute global y-limits for metrics
+    # -----------------------------------------
+    metric_ylims = {}
+    for metric in metrics:
+        ymin = df[metric].min()
+        ymax = df[metric].max()
+        metric_ylims[metric] = (ymin, ymax)
+
+    # Global y-limits for number_of_topics
+    tmin = df["number_of_topics"].min()
+    tmax = df["number_of_topics"].max()
+    topic_ylim = (tmin, tmax)
+
+    # -----------------------------------------
+    # Main plotting loop
+    # -----------------------------------------
     for parameter in PARAMETERS:
-        fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(20, 5))
+        fig, axes = plt.subplots(nrows=1, ncols=4, figsize=(30, 6))
         axes = axes.flatten()
+
+        handles_for_legend = []
+        labels_for_legend = []
 
         for model_name in df["model_name"].unique():
             df_model = df[df["model_name"] == model_name].copy()
-
-            # Normalize metrics for fair comparison
-            scaler = MinMaxScaler()
-            df_model[METRICS] = scaler.fit_transform(df_model[METRICS])
-
             color = MODEL_COLORS.get(model_name, "black")
 
-            # Precompute topic trend (not normalized!)
-            mean_topics = (
-                df_model.groupby(parameter)["number_of_topics"]
+            # Compute group means over the parameter sweep
+            grouped = (
+                df_model.groupby(parameter)[metrics + ["number_of_topics"]]
                 .mean()
                 .sort_index()
             )
 
-            for i, metric in enumerate(METRICS):
+            # Add model to legend ONCE
+            if model_name not in labels_for_legend:
+                h = axes[0].plot(
+                    grouped.index,
+                    grouped[metrics[0]],
+                    color=MODEL_COLORS.get(model_name, "black")
+                )[0]
+                handles_for_legend.append(h)
+                labels_for_legend.append(model_name)
+
+            # -------------------------
+            # Plot raw metrics
+            # -------------------------
+            for i, metric in enumerate(metrics):
                 ax = axes[i]
-
-                # -------------------------------
-                # Metric trend (solid line)
-                # -------------------------------
-                mean_metric = (
-                    df_model.groupby(parameter)[metric]
-                    .mean()
-                    .sort_index()
-                )
-
-                ax.plot(
-                    mean_metric.index,
-                    mean_metric.values,
+                line = ax.plot(
+                    grouped.index,
+                    grouped[metric],
                     marker="o",
                     linestyle="-",
                     linewidth=2,
                     alpha=0.9,
                     color=color,
-                    label=f"{model_name} metric" if i == 0 else None,
+                    label=model_name
                 )
 
-                # -------------------------------
-                # Topic count trend (twin axis)
-                # -------------------------------
-                ax2 = ax.twinx()
-                ax2.plot(
-                    mean_topics.index,
-                    mean_topics.values,
-                    linestyle="--",
-                    linewidth=2,
-                    alpha=0.8,
-                    color=color,
-                    label=f"{model_name} #topics" if i == 0 else None,
-                )
+                # Capture legend only once
+                if not handles_for_legend:
+                    handles_for_legend.append(line[0])
+                    labels_for_legend.append(model_name)
 
-                # Right axis label only once per subplot
-                if i == 2:  # right-most panel
-                    ax2.set_ylabel("Mean # Topics", color="grey")
-                    ax2.tick_params(axis='y', labelcolor='grey')
+            # -------------------------
+            # Plot number of topics
+            # -------------------------
+            ax_topics = axes[3]
+            ax_topics.plot(
+                grouped.index,
+                grouped["number_of_topics"],
+                marker="s",
+                linestyle="-",
+                linewidth=2,
+                alpha=0.9,
+                color=color,
+                label=model_name
+            )
 
-        # ---------------------------------------
-        # Formatting per subplot
-        # ---------------------------------------
-        for ax, metric in zip(axes, METRICS):
+        # -----------------------------------------
+        # Formatting metric subplots
+        # -----------------------------------------
+        for i, metric in enumerate(metrics):
+            ax = axes[i]
+            ymin, ymax = metric_ylims[metric]
+
             ax.set_title(
-                f"Normalized {DISPLAY_NAMES[metric]} vs {DISPLAY_NAMES[parameter]}"
+                f"{metric_display[metric]} vs {DISPLAY_NAMES[parameter]}",
+                fontsize=14,
             )
             ax.set_xlabel(DISPLAY_NAMES[parameter])
-            ax.set_ylabel(f"Normalized {DISPLAY_NAMES[metric]}")
-            ax.set_ylim(0, 1)
+            ax.set_ylabel(metric_display[metric])
+            ax.set_ylim(ymin, ymax)
             ax.grid(True)
             ax.set_xticks(sorted(df[parameter].unique()))
 
-        # ---------------------------------------
-        # Combined legends (metric + topic lines)
-        # ---------------------------------------
-        # Build a combined legend using both axes
-        handles_main = []
-        labels_main = []
-        for ax in axes:
-            h, l = ax.get_legend_handles_labels()
-            handles_main.extend(h)
-            labels_main.extend(l)
+        # -----------------------------------------
+        # Formatting topics subplot
+        # -----------------------------------------
+        ax_topics = axes[3]
+        ax_topics.set_title(
+            f"{topic_display} vs {DISPLAY_NAMES[parameter]}",
+            fontsize=14,
+        )
+        ax_topics.set_xlabel(DISPLAY_NAMES[parameter])
+        ax_topics.set_ylabel(topic_display)
+        ax_topics.set_xticks(sorted(df[parameter].unique()))
+        ax_topics.set_ylim(topic_ylim)
+        ax_topics.grid(True)
 
-            # also fetch legend handles from twin axes
-            h2, l2 = ax.twinx().get_legend_handles_labels()
-            handles_main.extend(h2)
-            labels_main.extend(l2)
-
-        # Remove duplicates
-        combined = dict(zip(labels_main, handles_main))
+        # -----------------------------------------
+        # Combined legend
+        # -----------------------------------------
         fig.legend(
-            combined.values(),
-            combined.keys(),
-            loc="upper center",
-            ncol=3,
+            handles_for_legend,
+            labels_for_legend,
+            loc="upper right",
+            ncol=len(labels_for_legend),
             bbox_to_anchor=(0.5, 1.12),
+            fontsize=12
         )
 
+        # Title
         fig.suptitle(
             f"Mean Trends Across Models — Parameter: {DISPLAY_NAMES[parameter]}",
-            fontsize=18,
+            fontsize=18
         )
+
         plt.tight_layout(rect=[0, 0, 1, 0.95])
 
+        # Save figure
         outpath = os.path.join(outdir, f"average_trends_{parameter}.png")
         plt.savefig(outpath, dpi=150)
         plt.show()
         plt.close()
+
+
+def plot_average_trends(df, outdir):
+    """
+    For each parameter (min_cluster_size, n_components, n_neighbors):
+        Create a row of 2 subplots:
+            1. C_v Coherence (raw)
+            2. Topic Diversity (raw)
+
+        Each line = one model, summarized by group means for that parameter.
+        Y-limits are consistent across ALL models and parameters (global),
+        with padding added to improve visibility.
+    """
+
+    # -----------------------------------------
+    # Metric definitions
+    # -----------------------------------------
+    metrics = ["c_v_score", "diversity_score"]
+    metric_display = {
+        "c_v_score": "Cv Coherence",
+        "diversity_score": "Topic Diversity"
+    }
+
+    # -----------------------------------------
+    # Compute global y-limits for metrics
+    # -----------------------------------------
+    metric_ylims = {}
+    for metric in metrics:
+        ymin = df[metric].min()
+        ymax = df[metric].max()
+        metric_ylims[metric] = (ymin, ymax)
+
+    # -----------------------------------------
+    # Create one figure with 3 rows x 2 columns
+    # -----------------------------------------
+    n_params = len(PARAMETERS)
+    fig, axes = plt.subplots(nrows=n_params, ncols=2, figsize=(15, 4.5 * n_params))
+
+    handles_for_legend = []
+    labels_for_legend = []
+
+    # -----------------------------------------
+    # Main plotting loop
+    # -----------------------------------------
+    for p_idx, parameter in enumerate(PARAMETERS):
+        row_axes = axes[p_idx]
+
+        for model_name in df["model_name"].unique():
+            df_model = df[df["model_name"] == model_name].copy()
+            color = MODEL_COLORS.get(model_name, "black")
+
+            # Compute group means over the parameter sweep
+            grouped = (
+                df_model.groupby(parameter)[metrics + ["number_of_topics"]]
+                .mean()
+                .sort_index()
+            )
+
+            # Add model to legend ONCE
+            if model_name not in labels_for_legend:
+                h = row_axes[0].plot(
+                    grouped.index,
+                    grouped[metrics[0]],
+                    color=MODEL_COLORS.get(model_name, "black")
+                )[0]
+                handles_for_legend.append(h)
+                labels_for_legend.append(model_name)
+
+            # -------------------------
+            # Plot raw metrics
+            # -------------------------
+            for i, metric in enumerate(metrics):
+                ax = row_axes[i]
+                line = ax.plot(
+                    grouped.index,
+                    grouped[metric],
+                    marker="o",
+                    linestyle="-",
+                    linewidth=2,
+                    alpha=0.9,
+                    color=color,
+                    label=model_name
+                )
+
+                # Capture legend only once
+                if not handles_for_legend:
+                    handles_for_legend.append(line[0])
+                    labels_for_legend.append(model_name)
+
+        # -----------------------------------------
+        # Formatting metric subplots for this row
+        # -----------------------------------------
+        for i, metric in enumerate(metrics):
+            ax = row_axes[i]
+            ymin, ymax = metric_ylims[metric]
+
+            ax.set_title(
+                f"{metric_display[metric]} vs {DISPLAY_NAMES[parameter]}",
+                fontsize=16,
+            )
+            ax.set_xlabel(DISPLAY_NAMES[parameter])
+            ax.set_ylabel(metric_display[metric])
+            ax.set_ylim(ymin, ymax)
+            ax.grid(True)
+            ax.set_xticks(sorted(df[parameter].unique()))
+
+    # -----------------------------------------
+    # Combined legend
+    # -----------------------------------------
+    fig.suptitle(
+        "Mean Trends of Cv Coherence and Topic Diversity per Embedding Model",
+        fontsize=18,
+          y=0.99   # move the title slightly up to make space for the legend
+    )
+
+    fig.text(
+        0.5, 0.955,     # x, y position in figure coordinates
+        "Over varying Min_Cluster_Size, N_Components, and N_Neighbors",
+        ha='center',
+        fontsize=12
+    )
+
+    fig.legend(
+        handles_for_legend,
+        labels_for_legend,
+        loc="upper center",
+        ncol=len(labels_for_legend),
+        bbox_to_anchor=(0.5, 0.95),   # <-- legend directly under title
+        fontsize=12
+    )
+
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+
+    # Save figure
+    outpath = os.path.join(outdir, "average_trends_all_parameters_cv_td.png")
+    plt.savefig(outpath, dpi=150)
+    plt.show()
+    plt.close()
+
 
 # =============================================
 # Main

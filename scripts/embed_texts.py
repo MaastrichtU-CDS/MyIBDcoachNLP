@@ -15,7 +15,7 @@ import re
 
 def sanitize_filename(s):
     """Remove characters that cannot be used in filenames."""
-    return re.sub(r'[^A-Za-z0-9_.-]+', '_', s)
+    return re.sub(r'[^A-Za-z0-9_.-]+', '_', s).lower()
 
 
 def parse_args():
