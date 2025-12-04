@@ -33,3 +33,4 @@ embeddings/
 *.sh
 *document_info*
 results_old/
+*.csv
