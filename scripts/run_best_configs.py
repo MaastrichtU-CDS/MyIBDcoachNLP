@@ -92,6 +92,12 @@ def parse_args():
 # ========================================================
 # Outlier reduction helper
 # ========================================================
+import re
+
+def remove_placeholders(text: str) -> str:
+    # Remove all [UPPERCASE] or [UPPERCASE_UPPERCASE] style placeholders
+    return re.sub(r'\[[A-Z]+(?:_[A-Z]+)?\]', ' ', text)
+
 def reduce_outlier_for_model(topic_model, docs, embeddings, stopwords):
     """Reduce outliers for a BERTopic model using embeddings strategy."""
     topics = topic_model.topics_
@@ -209,9 +215,16 @@ def main():
     # Fit model
     # ----------------------------------------------------
     print("\nFitting BERTopic model...")
-    topics, _ = model.fit_transform(sentences, embeddings)
 
-        # Extract UMAP reduced embeddings
+    sentences_clean = [remove_placeholders(s) for s in sentences]
+
+    topics, _ = model.fit_transform(sentences_clean, embeddings)
+    '''
+    vocab = model.vectorizer_model.vocabulary_
+    tokens_with_persoon = [t for t in vocab.keys() if "persoon" in t]
+    print(tokens_with_persoon)
+
+    # Extract UMAP reduced embeddings
     umap_embeddings = model.umap_model.embedding_
 
     # Save them for later use
@@ -220,7 +233,7 @@ def main():
         umap_embeddings
     )
     print(f"Saved UMAP embeddings to embeddings/{model_name}_umap_embeddings.npy")
-
+    '''
     # ----------------------------------------------------
     # Evaluate metrics (before outlier reassignment)
     # ----------------------------------------------------
@@ -249,7 +262,7 @@ def main():
     print("\nApplying automatic outlier reassignment...")
     model_reduced = reduce_outlier_for_model(
         topic_model=model,
-        docs=sentences,
+        docs=sentences_clean,
         embeddings=embeddings,
         stopwords=stopwords
     )
@@ -291,19 +304,25 @@ def main():
     model_reduced.save(reduced_model_path, serialization="pytorch", save_ctfidf=True)
 
     print("Saving topic info and document info...")
-    model.get_topic_info().to_csv(
+    topic_info = model.get_topic_info()
+    reduced_topic_info = model_reduced.get_topic_info()
+    doc_info = model.get_document_info(docs=sentences_clean)
+    doc_info["Document_Original"] = sentences
+    reduced_doc_info = model_reduced.get_document_info(docs=sentences_clean)
+    reduced_doc_info["Document_Original"] = sentences
+    topic_info.to_csv(
         os.path.join(args.output_dir, f"{base_model_name}_topic_info.csv"),
         index=False
     )
-    model_reduced.get_topic_info().to_csv(
+    reduced_topic_info.to_csv(
         os.path.join(args.output_dir, f"{base_model_name}_topic_info_reduced.csv"),
         index=False
     )
-    model.get_document_info(docs=sentences).to_csv(
+    doc_info.to_csv(
         os.path.join(args.output_dir, f"{base_model_name}_document_info.csv"),
         index=False
     )
-    model_reduced.get_document_info(docs=sentences).to_csv(
+    reduced_doc_info.to_csv(
         os.path.join(args.output_dir, f"{base_model_name}_document_info_reduced.csv"),
         index=False
     )

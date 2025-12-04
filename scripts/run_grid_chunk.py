@@ -59,6 +59,12 @@ def parse_args():
 # ============================================================
 # Metric helpers
 # ============================================================
+import re
+
+def remove_placeholders(text: str) -> str:
+    # Remove all [UPPERCASE] or [UPPERCASE_UPPERCASE] style placeholders
+    return re.sub(r'\[[A-Z]+(?:_[A-Z]+)?\]', ' ', text)
+
 def get_top_words(topic_model, top_n=10):
     topics = topic_model.get_topics()
     top_words = []
@@ -75,7 +81,6 @@ def get_coverage(topic_model):
     topics = topic_model.topics_
     valid_topic_count = sum(1 for topic in topics if topic != -1)
     return valid_topic_count / len(topics)
-
 
 def get_nr_topics(topic_model):
     topic_info = topic_model.get_topic_info()
@@ -211,7 +216,8 @@ def main():
             random_state=42
         )
 
-        topics, _ = topic_model.fit_transform(sentences, embeddings)
+        sentences_clean = [remove_placeholders(s) for s in sentences]
+        topics, _ = topic_model.fit_transform(sentences_clean, embeddings)
 
         top_words = get_top_words(topic_model, top_n=10)
         coverage = get_coverage(topic_model)

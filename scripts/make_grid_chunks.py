@@ -8,8 +8,8 @@ from glob import glob
 # -----------------------------
 old_combinations = set()
 
-if os.path.exists("chunks/tested_chunks"):
-    for path in glob("chunks/tested_chunks/*.json"):
+if os.path.exists("chunks_test/tested_chunks"):
+    for path in glob("chunks_test/tested_chunks/*.json"):
         with open(path, "r") as f:
             chunk = json.load(f)
             for combo in chunk:
@@ -37,11 +37,11 @@ print(f"Found {len(new_combinations)} new combinations to test.")
 # 4. Save new chunks
 # -----------------------------
 chunk_size = 10
-os.makedirs("chunks/new_chunks", exist_ok=True)
+os.makedirs("chunks_test", exist_ok=True)
 
 for i in range(0, len(new_combinations), chunk_size):
     chunk = new_combinations[i:i + chunk_size]
-    with open(f"chunks/new_chunks/chunk_{i // chunk_size}.json", "w") as f:
+    with open(f"chunks_test/chunk_{i // chunk_size}.json", "w") as f:
         json.dump(chunk, f)
 
 print(f"Created {len(new_combinations) // chunk_size + 1} new chunks.")
@@ -49,7 +49,7 @@ print(f"Created {len(new_combinations) // chunk_size + 1} new chunks.")
 # -----------------------------
 # 5. Update master log (tested.json)
 # -----------------------------
-tested_log_path = "chunks/tested.json"
+tested_log_path = "chunks_test/tested.json"
 tested = set(old_combinations)
 
 # Add newly generated ones as well (they are scheduled to run)
