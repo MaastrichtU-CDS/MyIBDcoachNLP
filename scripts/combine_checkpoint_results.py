@@ -46,7 +46,7 @@ def parse_args():
     parser.add_argument(
         "--output-file",
         type=str,
-        default="results/model_comparison/df_model_comparison.csv",
+        default="results/model_comparison/model_comparison.csv",
         help="Path to the output combined CSV file."
     )
 

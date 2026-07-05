@@ -45,8 +45,15 @@ def parse_args():
     parser.add_argument(
         "--model",
         type=str,
-        default="paraphrase-multilingual-mpnet-base-v2",
-        help="specify Hugging Face model ID."
+        required=True,
+        help="specify Hugging Face model ID. E.g., 'NetherlandsForensicInstitute/robbert-2022-dutch-sentence-transformers' or 'Qwen/Qwen3-Embedding-8B'."
+    )
+
+    parser.add_argument(
+        "--model-name",
+        type=str,
+        required=True,
+        help="Short name used for output directory and filenames (e.g. qwen3, robbert)."
     )
     
     return parser.parse_args()
@@ -55,12 +62,13 @@ def parse_args():
 def main():
     args = parse_args()
 
-    # sanitize model name for filename
-    safe_model_name = sanitize_filename(args.model)
+    output_dir = os.path.join(args.output, args.model_name)
+    os.makedirs(output_dir, exist_ok=True)
 
-    # If user gave a directory or prefix, append model name
-    # Final filename:  "<output>_<model>.npy"
-    output_file = f"{args.output}_{safe_model_name}.npy"
+    output_file = os.path.join(
+        output_dir,
+        f"{args.model_name}_sentence_embeddings.npy"
+    )
 
     print("=== Loading data ===")
     df = pd.read_excel(args.input)
