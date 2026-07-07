@@ -176,7 +176,7 @@ def main():
         ~sorted_topic_info["Topic"].isin(topics_to_exclude)
     ].copy()
 
-    sorted_topic_info = sorted_topic_info.sort_values("Rank").reset_index(drop=True)
+    sorted_topic_info = sorted_topic_info.reset_index(drop=True)
     sorted_topic_info["Rank"] = range(1, len(sorted_topic_info) + 1)
 
     selected_topics = sorted_topic_info.head(n_topics_to_visualize)["Topic"].tolist()
