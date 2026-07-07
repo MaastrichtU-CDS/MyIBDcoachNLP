@@ -14,12 +14,16 @@ def aggregate_topics_by_message(document_info, topic_info_labeled):
     # return merged_df
     return merged_df
 
-def topic_coherence_analysis(merged_df, output_dir="results/robbert"):
+def topic_coherence_analysis(merged_df, excluded_topics, output_dir="results/robbert"):
     
     os.makedirs(output_dir, exist_ok=True)
 
     # Remove rows without topic labels if any exist
     merged_df = merged_df.dropna(subset=["Topic"]).copy()
+    # Remove excluded topics
+    merged_df = merged_df[
+        ~merged_df["Topic"].isin(excluded_topics)
+    ].copy()
 
     # Make sure Topic is integer-like
     merged_df["Topic"] = merged_df["Topic"].astype(int)
@@ -50,23 +54,6 @@ def topic_coherence_analysis(merged_df, output_dir="results/robbert"):
 
     message_topics.to_csv(
         os.path.join(output_dir, "message_level_topics.csv"),
-        index=False,
-    )
-
-    # Exact topic combinations
-    common_topic_combinations = (
-        message_topics["topic_name_combination"]
-        .value_counts()
-        .reset_index()
-    )
-
-    common_topic_combinations.columns = [
-        "topic_name_combination",
-        "n_messages",
-    ]
-
-    common_topic_combinations.to_csv(
-        os.path.join(output_dir, "common_topic_combinations.csv"),
         index=False,
     )
 
@@ -104,9 +91,6 @@ def topic_coherence_analysis(merged_df, output_dir="results/robbert"):
     print(f"Mean unique topics per message: {message_topics['n_unique_topics'].mean():.2f}")
     print(f"Max unique topics per message: {message_topics['n_unique_topics'].max()}")
 
-    print("\nTop 10 topic combinations:")
-    print(common_topic_combinations.head(10))
-
     print("\nTop 10 topic co-occurrences:")
     print(topic_cooccurrence.head(10))
 
@@ -118,12 +102,13 @@ def main():
     # input files
     document_info = pd.read_csv(f"results/robbert/robbert_final_document_info.csv")
     topic_info_labeled = pd.read_csv(f"results/robbert/robbert_final_topic_info_labeled.csv")
+    excluded_topics = pd.read_csv("results/robbert/robbert_topics_excluded_from_visualization.csv")["Topic"].tolist()
 
     # merge the document_info and topic_info DataFrames on "Topic"
     merged_df = aggregate_topics_by_message(document_info, topic_info_labeled)
 
     # analyzie topic coherence on a message level
-    topic_coherence_analysis(merged_df)
+    topic_coherence_analysis(merged_df, excluded_topics)
 
     
 if __name__ == "__main__":
