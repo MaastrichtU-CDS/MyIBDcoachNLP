@@ -11,3 +11,4 @@ surfvenv/
 *.slurm
 checkpoints*/
 _pycache_/
+test/
