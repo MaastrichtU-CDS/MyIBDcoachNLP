@@ -1,220 +1,304 @@
 #!/usr/bin/env python3
+
 import os
-import pandas as pd
-import matplotlib.pyplot as plt
-from umap import UMAP
+
 import datamapplot as dmp
+import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+from umap import UMAP
+from ast import literal_eval
 
+def extract_first_n_words(value, top_n=4):
+    """Return the first `top_n` unique topic words, preserving order."""
+    if isinstance(value, str):
+        words = literal_eval(value)
+    else:
+        words = list(value)
 
-def extract_first_n_words(representations, top_n=4):
-    representations = str(representations)
-    return (
-        " ".join(representations.strip("[").strip("]").split(",")[:top_n])
-        .replace("'", "")
-        .replace('"', "")
-        .strip()
-        .replace("  ", ", ")
-    )
+    seen = set()
+    unique_words = []
 
+    for word in words:
+        word = str(word).strip()
+        if word not in seen:
+            seen.add(word)
+            unique_words.append(word)
+        if len(unique_words) == top_n:
+            break
 
-def label_topic(row, selected_topics):
-    if row["Topic"] in selected_topics and not pd.isna(row["Top_Words"]):
-        return f"{int(row['Rank'])}: {row['Top_Words']}"
+    return ", ".join(unique_words)
+
+def label_topic(
+    row,
+    selected_topics,
+    label_column="Plot_Label",
+):
+    if pd.isna(row["Label"]):
+        return "Unlabelled"
+
+    prefixes = {
+        "Clinical": "C",
+        "Non-Clinical": "N",
+    }
+
+    prefix = prefixes.get(str(row["Label"]).strip())
+    if prefix is None:
+        return "Unlabelled"
+
+    if (
+        row["Topic"] in selected_topics
+        and pd.notna(row[label_column])
+        and pd.notna(row["Rank"])
+    ):
+        return f"{prefix}{int(row['Rank'])}: {row[label_column]}"
+
     return "Unlabelled"
 
+
 def restore_embedding_duplicates(deduplicated_sentences, full_sentences, reduced_embeddings):
+    """Assign duplicate sentences the embedding of their deduplicated version."""
     lookup = dict(zip(deduplicated_sentences, reduced_embeddings))
-    full_reduced_embeddings = np.vstack([lookup[s] for s in full_sentences])
-    return full_reduced_embeddings
+    missing = [sentence for sentence in full_sentences if sentence not in lookup]
+    if missing:
+        raise KeyError(
+            f"{len(missing)} full sentences were not found in the deduplicated "
+            f"sentence lookup. Examples: {missing[:5]}"
+        )
+    return np.vstack([lookup[sentence] for sentence in full_sentences])
+
 
 def reduce_embeddings(
-    deduplicated_sentences,
-    full_sentences,
-    input_embeddings_path,
-    output_embeddings_path,
+    deduplicated_sentences, full_sentences, input_embeddings_path, output_embeddings_path
 ):
+    """Reduce embeddings to two dimensions with UMAP, or load cached output."""
     if not os.path.exists(input_embeddings_path):
         raise FileNotFoundError(f"Embeddings file not found: {input_embeddings_path}")
 
-    embeddings = np.load(input_embeddings_path)
-
     if os.path.exists(output_embeddings_path):
         print(f"Loading reduced embeddings from {output_embeddings_path}")
-        full_reduced_embeddings = np.load(output_embeddings_path)
-        return full_reduced_embeddings
+        reduced = np.load(output_embeddings_path)
+        if len(reduced) != len(full_sentences):
+            raise ValueError(
+                "Saved embeddings do not match document_info rows: "
+                f"{len(reduced)} embeddings, {len(full_sentences)} sentences"
+            )
+        return reduced
 
-    print(
-        "Reducing embeddings using UMAP with n_neighbors=10, "
-        "n_components=2, min_dist=0.0, metric='cosine'"
-    )
-
-    reducer = UMAP(
+    embeddings = np.load(input_embeddings_path)
+    print("Reducing embeddings with UMAP")
+    reduced = UMAP(
         n_neighbors=10,
         n_components=2,
         min_dist=0.0,
         metric="cosine",
         random_state=42,
+    ).fit_transform(embeddings)
+
+    if len(deduplicated_sentences) != len(reduced):
+        raise ValueError(
+            "Deduplicated sentence and embedding counts differ: "
+            f"{len(deduplicated_sentences)} vs {len(reduced)}"
+        )
+
+    full_reduced = restore_embedding_duplicates(
+        deduplicated_sentences, full_sentences, reduced
     )
+    os.makedirs(os.path.dirname(output_embeddings_path), exist_ok=True)
+    np.save(output_embeddings_path, full_reduced)
+    print(f"Saved reduced embeddings to {output_embeddings_path}")
+    return full_reduced
 
-    reduced_embeddings = reducer.fit_transform(embeddings)
-    print(f"Reduced embeddings shape: {reduced_embeddings.shape}")
-    print(f"Number of deduplicated sentences: {len(deduplicated_sentences)}")
-    assert len(deduplicated_sentences) == reduced_embeddings.shape[0], (
-        "Mismatch between deduplicated sentences and embedding array sizes."
-    )
 
-    full_reduced_embeddings = restore_embedding_duplicates(
-        deduplicated_sentences, full_sentences, reduced_embeddings
-    )
+def prepare_separate_topic_ranks(topic_info, n_topics_per_label=10):
+    """Rank Clinical and Non-Clinical topics separately by count."""
+    topic_info = topic_info.copy()
+    topic_info["Label"] = topic_info["Label"].astype("string").str.strip()
+    ranked = topic_info[topic_info["Label"].isin(["Clinical", "Non-Clinical"])].copy()
 
-    assert full_reduced_embeddings.shape[0] == len(full_sentences), (
-        "Mismatch between full sentences and restored embedding array sizes."
-    )
-    print(f"Number of full sentences: {len(full_sentences)}")
-    print(f"Full reduced embeddings shape: {full_reduced_embeddings.shape}")
+    if ranked.empty:
+        raise ValueError("No Clinical or Non-Clinical topics were found.")
 
-    np.save(output_embeddings_path, full_reduced_embeddings)
-    print(f"Reduced UMAP 2D embeddings saved to {output_embeddings_path}")
+    ranked["Count"] = pd.to_numeric(ranked["Count"], errors="coerce")
+    if ranked["Count"].isna().any():
+        bad_rows = ranked.loc[ranked["Count"].isna(), ["Topic", "Count"]]
+        raise ValueError(f"Invalid topic Count values:\n{bad_rows}")
 
-    return full_reduced_embeddings
+    ranked = ranked.sort_values(
+        ["Label", "Count", "Topic"], ascending=[True, False, True]
+    ).reset_index(drop=True)
+    ranked["Rank"] = ranked.groupby("Label").cumcount() + 1
+    selected = ranked[ranked["Rank"] <= n_topics_per_label].reset_index(drop=True)
+    return ranked, selected
 
 
 def visualize_docs(
     model_name,
     reduced_embeddings,
-    sorted_topic_info,
+    ranked_topic_info,
+    selected_topic_info,
     doc_info,
     output_dir,
-    n_topics=30,
-    use_english_label=True,
+    n_topics_per_label=10,
+    label_source="interpretation",
 ):
-    sorted_topic_info = sorted_topic_info.copy()
+    """
+    Create a DataMapPlot of the top Clinical and Non-Clinical topics.
 
-    if use_english_label:
-        sorted_topic_info["Top_Words"] = sorted_topic_info["Translation"].apply(
-            lambda x: extract_first_n_words(x, top_n=4)
+    label_source:
+        "interpretation"     -> use Interpretation_Label
+        "english_top_words"  -> use Translation
+        "dutch_top_words"    -> use Representation
+    """
+    if len(reduced_embeddings) != len(doc_info):
+        raise ValueError(
+            "Embedding and document counts differ: "
+            f"{len(reduced_embeddings)} vs {len(doc_info)}"
         )
+
+    ranked = ranked_topic_info.copy()
+
+    if label_source == "interpretation":
+        if "Interpretation_Label" not in ranked.columns:
+            raise KeyError("Missing column: Interpretation_Label")
+
+        ranked["Plot_Label"] = ranked["Interpretation_Label"].fillna("Unlabelled")
+
+    elif label_source == "english_top_words":
+        ranked["Plot_Label"] = ranked["Translation"].apply(
+            extract_first_n_words
+        )
+
+    elif label_source == "dutch_top_words":
+        ranked["Plot_Label"] = ranked["Representation"].apply(
+            extract_first_n_words
+        )
+
     else:
-        sorted_topic_info["Top_Words"] = sorted_topic_info["Representation"].apply(
-            lambda x: extract_first_n_words(x, top_n=4)
+        raise ValueError(
+            "label_source must be 'interpretation', "
+            "'english_top_words', or 'dutch_top_words'."
         )
 
-    selected_topics = sorted_topic_info.head(n_topics)["Topic"].tolist()
+    selected_topics = set(selected_topic_info["Topic"])
 
-    labeled_doc_info = doc_info[["sentence", "Topic"]].merge(
-        sorted_topic_info[["Topic", "Rank", "Top_Words"]],
+    labeled_docs = doc_info[["sentence", "Topic"]].merge(
+        ranked[["Topic", "Rank", "Plot_Label", "Label"]],
         on="Topic",
         how="left",
+        validate="many_to_one",
     )
 
-    labeled_doc_info["plot_labels"] = labeled_doc_info.apply(
-        lambda row: label_topic(row, selected_topics),
+    print(
+        "Document rows without a ranked Clinical or Non-Clinical label: "
+        f"{labeled_docs['Label'].isna().sum():,}"
+    )
+
+    plot_labels = labeled_docs.apply(
+        label_topic,
         axis=1,
+        selected_topics=selected_topics,
+        label_column="Plot_Label",
+    ).tolist()
+
+    counts = selected_topic_info["Label"].value_counts()
+    print(
+        f"Selected {counts.get('Clinical', 0)} Clinical topics and "
+        f"{counts.get('Non-Clinical', 0)} Non-Clinical topics."
     )
 
-    plot_labels = labeled_doc_info["plot_labels"].tolist()
-
-    fig = dmp.create_plot(
+    fig, ax = dmp.create_plot(
         reduced_embeddings,
         plot_labels,
         marker_type="o",
-        title=f"Top {n_topics} Topics Identified by {model_name.upper()} Model",
-        sub_title="A 2-dimensional data map of sentences from Dutch IBD patient messages",
+        title=(
+            f"Top {n_topics_per_label} Clinical and Non-Clinical Topics Identified by {model_name.upper()}"
+        ),
+        sub_title=(
+            "A 2-dimensional data map of sentences "
+            "from Dutch IBD patient messages"
+        ),
         label_over_points=True,
         dynamic_label_size=True,
         max_font_size=60,
         min_font_size=6,
     )
-
-    if use_english_label:
-        plot_path = os.path.join(
-            output_dir, f"top_{n_topics}_topics_datamap_english.png"
-        )
-    else:
-        plot_path = os.path.join(output_dir, f"top_{n_topics}_topics_datamap.png")
-
-    plt.savefig(plot_path, dpi=300, bbox_inches="tight")
-    plt.close()
-
-    print(f"Document visualization saved to {plot_path}")
-
+    plot_path = os.path.join(output_dir, f"{model_name}_top_{n_topics_per_label}_{label_source}_topics_plot.png")
+    print(f"Saving plot to {plot_path}")
+    fig.savefig(plot_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
 
 def main():
     model_name = "robbert"
-    n_topics_to_visualize = 30
+    n_topics_per_label = 15
+    results_dir = f"results/{model_name}"
+    embeddings_dir = f"embeddings/{model_name}"
+    os.makedirs(results_dir, exist_ok=True)
+    os.makedirs(embeddings_dir, exist_ok=True)
 
-    topics_to_exclude = [
-        32, 78, 150, 11, 54, 40, 24, 30, 57, 29,
-        80, 63, 108, 88, 76, 124, 89, 143, 149,
-    ]
+    with open("topics_excluded_from_visualization.txt") as f:
+        topics_to_exclude = [int(line) for line in f if line.strip().isdigit()]
 
     print("\n=== Visualizing Documents ===")
-
-    deduplicated_sentences_df = pd.read_excel(
+    deduplicated_df = pd.read_excel(
         "data/cleaned_patient_deduplicated_sentences_for_embedding.xlsx"
     )
-
     document_info = pd.read_csv(
-        f"results/{model_name}/{model_name}_final_document_info.csv"
+        f"{results_dir}/{model_name}_final_document_info.csv"
     )
+    topic_info = pd.read_csv(f"{results_dir}/{model_name}_final_topic_info_labeled.csv")
 
-    sorted_topic_info = pd.read_csv(
-        f"results/{model_name}/{model_name}_final_topic_info_labeled.csv"
-    )
+    required = {
+        "document_info": ({"sentence", "Topic"}, document_info),
+        "topic_info": (
+            {"Topic", "Count", "Representation", "Translation", "Label", "Interpretation_Label"},
+            topic_info,
+        ),
+    }
+    for name, (columns, frame) in required.items():
+        missing = columns - set(frame.columns)
+        if missing:
+            raise KeyError(f"Missing {name} columns: {sorted(missing)}")
 
-    topics_excluded_df = sorted_topic_info[
-        sorted_topic_info["Topic"].isin(topics_to_exclude)
-    ]
+    for frame in (document_info, topic_info):
+        frame["Topic"] = pd.to_numeric(frame["Topic"], errors="coerce").astype("Int64")
 
-    topics_excluded_df.to_csv(
-        f"results/{model_name}/{model_name}_topics_excluded_from_visualization.csv",
+    excluded_mask = topic_info["Topic"].isin(topics_to_exclude)
+    excluded_topics = topic_info[excluded_mask].copy()
+    excluded_topics.to_csv(
+        f"{results_dir}/{model_name}_topics_excluded_from_visualization.csv",
         index=False,
     )
 
-    sorted_topic_info = sorted_topic_info[
-        ~sorted_topic_info["Topic"].isin(topics_to_exclude)
-    ].copy()
-
-    sorted_topic_info = sorted_topic_info.reset_index(drop=True)
-    sorted_topic_info["Rank"] = range(1, len(sorted_topic_info) + 1)
-
-    selected_topics = sorted_topic_info.head(n_topics_to_visualize)["Topic"].tolist()
-
-    print(f"Excluded {len(topics_to_exclude)} topics.")
-    print(f"Visualizing top {len(selected_topics)} remaining topics:")
-
-    deduplicated_sentences = deduplicated_sentences_df["sentence"].to_list()
-    full_sentences = document_info["sentence"].to_list()
-
-    output_dir = f"./results/{model_name}/"
-    os.makedirs(output_dir, exist_ok=True)
-
-    embeddings_dir = f"./embeddings/{model_name}/"
-    input_embeddings_path = os.path.join(
-        embeddings_dir, f"{model_name}_sentence_embeddings.npy"
+    ranked_topics, selected_topics = prepare_separate_topic_ranks(
+        topic_info[~excluded_mask], n_topics_per_label
     )
-    output_embeddings_path = os.path.join(
-        embeddings_dir, f"{model_name}_umap_reduced_embeddings.npy"
+
+
+    print(f"Excluded {len(excluded_topics)} topics.")
+    print("\nSelected topics with label-specific ranks:")
+    print(
+        selected_topics[["Topic", "Label", "Rank", "Count", "Translation", "Interpretation_Label"]]
+        .to_string(index=False)
     )
 
     reduced_embeddings = reduce_embeddings(
-        deduplicated_sentences,
-        full_sentences,
-        input_embeddings_path,
-        output_embeddings_path,
+        deduplicated_df["sentence"].tolist(),
+        document_info["sentence"].tolist(),
+        f"{embeddings_dir}/{model_name}_sentence_embeddings.npy",
+        f"{embeddings_dir}/{model_name}_umap_reduced_embeddings.npy",
     )
 
-    print(f"Visualizing documents for {model_name}")
-
+    print(f"\nVisualizing documents for {model_name}")
     visualize_docs(
         model_name=model_name,
         reduced_embeddings=reduced_embeddings,
-        sorted_topic_info=sorted_topic_info,
+        ranked_topic_info=ranked_topics,
+        selected_topic_info=selected_topics,
         doc_info=document_info,
-        output_dir=output_dir,
-        n_topics=n_topics_to_visualize,
-        use_english_label=True,
+        output_dir=results_dir,
+        n_topics_per_label=n_topics_per_label,
+        label_source="dutch_top_words", # choose from "interpretation", "english_top_words", or "dutch_top_words"
     )
 
 
