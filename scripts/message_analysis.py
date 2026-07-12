@@ -52,6 +52,7 @@ def topic_coherence_analysis(merged_df, excluded_topics, output_dir="results/rob
         lambda x: " | ".join(x)
     )
 
+    # print the occurences of "[Non-Medical]" in the unique_labels column
     message_topics.to_csv(
         os.path.join(output_dir, "message_level_topics.csv"),
         index=False,
@@ -94,6 +95,8 @@ def topic_coherence_analysis(merged_df, excluded_topics, output_dir="results/rob
     print("\nTop 10 topic co-occurrences:")
     print(topic_cooccurrence.head(10))
 
+    print("\nUnique labels on the message level:")
+    print(message_topics["unique_labels"].value_counts())
     print(f"\nSaved outputs to: {output_dir}")
 
     return message_topics, topic_cooccurrence
