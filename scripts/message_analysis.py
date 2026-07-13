@@ -9,7 +9,11 @@ def aggregate_topics_by_message(document_info, topic_info_labeled):
     """
 
     # merge the document_info and topic_info DataFrames on "Topic"
-    merged_df = document_info.merge(topic_info_labeled[["Topic", "Translation", "Label"]], on="Topic", how="left")
+    merged_df = document_info.merge(
+        topic_info_labeled[["Topic", "Translation", "Label", "Interpretation_Label"]],
+        on="Topic",
+        how="left",
+    )
     
     # return merged_df
     return merged_df
@@ -32,11 +36,15 @@ def topic_coherence_analysis(merged_df, excluded_topics, output_dir="results/rob
     merged_df["Topic_Name"] = (
         merged_df["Topic"].astype(str) + ": " + merged_df["Translation"].astype(str)
     )
+    merged_df["Interpretation_Label"] = merged_df["Interpretation_Label"].fillna("Unknown").astype(str)
+    merged_df["Topic_Item"] = list(zip(merged_df["Topic_Name"], merged_df["Interpretation_Label"]))
+
     message_topics = (
         merged_df.groupby("message_id", sort=False)
         .agg(
             unique_topics=("Topic", lambda x: sorted(set(x))),
             unique_topic_names=("Topic_Name", lambda x: sorted(set(x))),
+            unique_topic_items=("Topic_Item", lambda x: sorted(set(x), key=lambda t: t[0])),
             unique_labels=("Label", lambda x: sorted(set(x.dropna()))),
             n_unique_topics=("Topic", "nunique"),
             n_sentences=("Topic", "size"),
@@ -63,13 +71,16 @@ def topic_coherence_analysis(merged_df, excluded_topics, output_dir="results/rob
     topic_pairs = []
 
     for _, row in message_topics.iterrows():
-        topics = row["unique_topic_names"]
+        topics = row["unique_topic_items"]
 
         if len(topics) > 1:
-            for topic_a, topic_b in itertools.combinations(topics, 2):
-                topic_pairs.append((topic_a, topic_b))
+            for (topic_a, interpretation_label_a), (topic_b, interpretation_label_b) in itertools.combinations(topics, 2):
+                topic_pairs.append((topic_a, interpretation_label_a, topic_b, interpretation_label_b))
 
-    topic_pair_df = pd.DataFrame(topic_pairs, columns=["topic_a", "topic_b"])
+    topic_pair_df = pd.DataFrame(
+        topic_pairs,
+        columns=["topic_a", "interpretation_label_a", "topic_b", "interpretation_label_b"],
+    )
 
     if not topic_pair_df.empty:
         topic_cooccurrence = (
@@ -79,7 +90,7 @@ def topic_coherence_analysis(merged_df, excluded_topics, output_dir="results/rob
         )
     else:
         topic_cooccurrence = pd.DataFrame(
-            columns=["topic_a", "topic_b", "n_messages"]
+            columns=["topic_a", "interpretation_label_a", "topic_b", "interpretation_label_b", "n_messages"]
         )
 
     topic_cooccurrence.to_csv(
